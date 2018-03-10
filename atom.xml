@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>THE</title>
+  <subtitle>GONETHEN</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://gonethen.github.io/"/>
+  <updated>2018-03-10T13:32:20.500Z</updated>
+  <id>http://gonethen.github.io/</id>
+  
+  <author>
+    <name>GONETHEN</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>test</title>
+    <link href="http://gonethen.github.io/2018/03/10/test/"/>
+    <id>http://gonethen.github.io/2018/03/10/test/</id>
+    <published>2018-03-10T13:29:26.776Z</published>
+    <updated>2018-03-10T13:32:20.500Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="test"><a href="#test" class="headerlink" title="test"></a>test</h2><a id="more"></a>
+<h2 id="test-1"><a href="#test-1" class="headerlink" title="test"></a>test</h2><p>this is test…</p>
+<hr>
+<ul>
+<li>this is a test</li>
+</ul>
+<p><code>i am testing</code></p>
+<p>​</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;test&quot;&gt;&lt;a href=&quot;#test&quot; class=&quot;headerlink&quot; title=&quot;test&quot;&gt;&lt;/a&gt;test&lt;/h2&gt;
+    
+    </summary>
+    
+      <category term="日志" scheme="http://gonethen.github.io/categories/%E6%97%A5%E5%BF%97/"/>
+    
+    
+      <category term="日志" scheme="http://gonethen.github.io/tags/%E6%97%A5%E5%BF%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>java定时任务三种方式</title>
+    <link href="http://gonethen.github.io/2017/07/23/java%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/"/>
+    <id>http://gonethen.github.io/2017/07/23/java定时任务/</id>
+    <published>2017-07-23T01:23:56.124Z</published>
+    <updated>2017-07-23T02:23:38.788Z</updated>
+    
+    <content type="html"><![CDATA[<p>Thread/TimerTask/ScheduledExecutorService</p>
+<a id="more"></a>
+<h2 id="java定时任务三种方式"><a href="#java定时任务三种方式" class="headerlink" title="java定时任务三种方式"></a>java定时任务三种方式</h2><h3 id="Thread"><a href="#Thread" class="headerlink" title="Thread"></a>Thread</h3><p>创建一个thread，然后让它在while循环里一直运行着，通过sleep方法来达到定时任务的效果。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Task1</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        <span class="comment">// run in a second</span></div><div class="line">        <span class="keyword">final</span> <span class="keyword">long</span> timeInterval = <span class="number">1000</span>;</div><div class="line">        Runnable runnable = <span class="keyword">new</span> Runnable() &#123;</div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">                <span class="keyword">while</span> (<span class="keyword">true</span>) &#123;</div><div class="line">                    <span class="comment">// ------- code for task to run</span></div><div class="line">                    System.out.println(<span class="string">"Hello !!"</span>);</div><div class="line">                    <span class="comment">// ------- ends here</span></div><div class="line">                    <span class="keyword">try</span> &#123;</div><div class="line">                        Thread.sleep(timeInterval);</div><div class="line">                    &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</div><div class="line">                        e.printStackTrace();</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line">        Thread thread = <span class="keyword">new</span> Thread(runnable);</div><div class="line">        thread.start();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="TimerTask"><a href="#TimerTask" class="headerlink" title="TimerTask"></a>TimerTask</h3><p>当Timer的构造器被调用时，它创建了一个线程，这个线程可以调度多任务，它是线程安全的。</p>
+<p>优势：</p>
+<ul>
+<li>启动和取消任务可以控制</li>
+<li>第一次执行任务时可以指定delay时间</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Task2</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        TimerTask task = <span class="keyword">new</span> TimerTask() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">                <span class="comment">// task to run goes here</span></div><div class="line">                System.out.println(<span class="string">"Hello !!!"</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line">        Timer timer = <span class="keyword">new</span> Timer();</div><div class="line">        <span class="keyword">long</span> delay = <span class="number">0</span>;</div><div class="line">        <span class="keyword">long</span> intevalPeriod = <span class="number">1</span> * <span class="number">1000</span>;</div><div class="line">        <span class="comment">// schedules the task to be run in an interval</span></div><div class="line">        timer.scheduleAtFixedRate(task, delay, intevalPeriod);</div><div class="line">    &#125; <span class="comment">// end of main</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="ScheduledExecutorService"><a href="#ScheduledExecutorService" class="headerlink" title="ScheduledExecutorService"></a>ScheduledExecutorService</h3><p>通过ScheduledExecutorService.scheduleAtFixedRate()实现。</p>
+<p>优势：</p>
+<ul>
+<li>通过线程池的方式执行</li>
+<li>灵活的设定第一次执行任务delay时间</li>
+<li>提供了良好的约定，以便设定执行的时间间隔</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Task3</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        Runnable runnable = <span class="keyword">new</span> Runnable() &#123;</div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">                <span class="comment">// task to run goes here</span></div><div class="line">                System.out.println(<span class="string">"Hello !!"</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line">        ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();</div><div class="line">        <span class="comment">// 第二个参数为首次执行的延时时间，第三个参数为定时执行的间隔时间</span></div><div class="line">        service.scheduleAtFixedRate(runnable, <span class="number">10</span>, <span class="number">1</span>, TimeUnit.SECONDS);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Thread/TimerTask/ScheduledExecutorService&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="技术" scheme="http://gonethen.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="java" scheme="http://gonethen.github.io/tags/java/"/>
+    
+      <category term="定时任务" scheme="http://gonethen.github.io/tags/%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>个人简历</title>
+    <link href="http://gonethen.github.io/2017/02/26/%E4%B8%AA%E4%BA%BA%E7%AE%80%E5%8E%86/"/>
+    <id>http://gonethen.github.io/2017/02/26/个人简历/</id>
+    <published>2017-02-26T13:26:03.804Z</published>
+    <updated>2017-04-18T13:37:17.806Z</updated>
+    
+    <content type="html"><![CDATA[<font face="等线">学无止境。</font>
+
+<a id="more"></a>
+<h1 id="龚士杰"><a href="#龚士杰" class="headerlink" title="龚士杰"></a>龚士杰</h1><h3 id="基本信息"><a href="#基本信息" class="headerlink" title="- 基本信息"></a>- <font face="等线">基本信息</font></h3><ul>
+<li>户籍：河北省邯郸市</li>
+<li>出生年月：1993年8月</li>
+<li>政治面貌：党员</li>
+<li>毕业院校：石家庄铁路职业技术学院 - 软件技术</li>
+<li>工作经验：2年</li>
+<li>电子邮箱：gonethen@163.com</li>
+<li>联系电话：18731152252</li>
+</ul>
+<h3 id="专业技能"><a href="#专业技能" class="headerlink" title="- 专业技能"></a>- <font face="等线">专业技能</font></h3><ol>
+<li>熟练掌握 Java、Servlet、Jsp、JavaScript、JQuery、Ajax、JSTL等技术</li>
+<li>熟练使用SpringMVC、MyBatis、iBatis、Spring、Hibernate、log4j等开源框架</li>
+<li>熟练使用工厂方法、静态工厂、单例、模板方法等设计模式</li>
+<li>基本掌握 Oracle、MySQL、SQL Server等数据库的操作</li>
+<li>基本掌握HTML5、CSS3、EasyUI、AmazeUI等前端技术</li>
+<li>基本了解Tomcat、WebLogic 等应用服务器</li>
+<li>基本了解Ehcache、Redis、memcache等缓存框架</li>
+<li>熟练使用 git、Maven、IDEA、SVN、MyEclipse、Eclipse、PL/SQL、secureCRT、markdown、hexo等插件、工具或技术</li>
+</ol>
+<h3 id="工作经历"><a href="#工作经历" class="headerlink" title="- 工作经历"></a>- <font face="等线">工作经历</font></h3><ul>
+<li><strong>2017/03 - 2017/04 北京美云集网络科技责任有限公司</strong><ul>
+<li>负责产品<code>店小秘</code>的用户模块的找回密码、找回邮箱和单点登录，以及产品模块部分功能</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>2016/05 - 2017/01 北京通铭教育科技股份有限公司</strong><ul>
+<li>负责<code>国寿经验萃取工具系统</code>的需求分析、数据库设计、系统开发、测试等过程，完成其中90%的工作量</li>
+<li>负责<code>工商银行网络大学</code>二次开发与维护(国际化的实现、客户端数据区分筛选、bug修复、系统优化、报表开发)</li>
+</ul>
+</li>
+<li><strong>2015/05 - 2016/05 中国软件与技术服务股份有限公司</strong><ul>
+<li>负责<code>中国免疫规划信息管理系统</code>的二次开发、维护、数据处理</li>
+</ul>
+</li>
+<li><strong>2014/11 - 2015/05 石家庄中川科技有限公司</strong><ul>
+<li>负责<code>进销存</code>项目的需求分析、开发、测试</li>
+</ul>
+</li>
+</ul>
+<h3 id="项目经验"><a href="#项目经验" class="headerlink" title="- 项目经验"></a>- <font face="等线">项目经验</font></h3><ul>
+<li><h4 id="店小秘"><a href="#店小秘" class="headerlink" title="店小秘"></a><font face="等线">店小秘</font></h4><ul>
+<li>开发环境：JSP、bootstrap、JSTL、JQuery、SpringMVC、Mysql</li>
+<li>主要功能：<ol>
+<li>产品的采集，发布，以及和仓库商品的配对</li>
+<li>订单管理、订单号扫描打包、物流管理</li>
+<li>仓库管理、商品管理、盘点管理</li>
+<li>用户子账号、权限、店铺授权等功能</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><h4 id="国寿经验萃取工具系统"><a href="#国寿经验萃取工具系统" class="headerlink" title="国寿经验萃取工具系统"></a><font face="等线">国寿经验萃取工具系统</font></h4><ul>
+<li>开发环境：JSP、bootstrap、JSTL、JQuery、SpringMVC、MyBatis、Oracle、Tomcat</li>
+<li>主要功能：<ul>
+<li>前台<ol>
+<li>萃取渠道、萃取方向选择；萃取用户信息的增改查操作；萃取问题、答案的新增修改回显；访谈记录的新增和修改、生成PPT</li>
+<li>登录用户以及登录次数的记录；导航功能的实现；PC端和手机端兼容显示的实现</li>
+</ol>
+</li>
+<li>后台<ol>
+<li>萃取数据的删改查；PPT的上传与下载；萃取数据的年均、月均、人均统计分析</li>
+<li>后端管理系统管理员授权新增管理员；根据权限管辖范围得到机构树，管理员可查询管辖范围内用户的数据</li>
+<li>萃取问题类型和萃取问题的增删改查</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h4 id="中国免疫规划信息管理系统"><a href="#中国免疫规划信息管理系统" class="headerlink" title="中国免疫规划信息管理系统"></a><font face="等线">中国免疫规划信息管理系统</font></h4><ul>
+<li>开发环境：JSP、JS、Servlet、Hibernate、Webwork、Oracle、Weblogic</li>
+<li>主要功能：<ul>
+<li>疫苗注射器的计划、出入库管理</li>
+<li>常规接种报表导入、上报、审核，个案查询，统计分析</li>
+<li>异常反应上报审核查询，统计分析</li>
+<li>冷链设备信息管理，统计分析</li>
+<li>综合管理，功能、用户、权限管理，配置管理</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><h4 id="进销存系统"><a href="#进销存系统" class="headerlink" title="进销存系统"></a><font face="等线">进销存系统</font></h4><ul>
+<li>开发环境：JSP、JQuery、EasyUI、SpringMVC、MyBatis、SQL Server</li>
+<li>主要功能：商品进货申请审核，采购合同订单审核，出入库信息、库存信息管理，销售管理</li>
+</ul>
+</li>
+<li><h4 id="个人网站"><a href="#个人网站" class="headerlink" title="个人网站"></a><font face="等线">个人网站</font></h4><ul>
+<li>开发环境：JSP、JQuery、AmazeUI、JSTL、SpringMVC、MyBatis、Ehcache、Mysql</li>
+<li>主要功能：注册、登录、论坛发帖、回帖、websocket聊天室、坦克大战、个人信息维护、功能角色权限维护等</li>
+</ul>
+</li>
+</ul>
+<h3 id="在校经历"><a href="#在校经历" class="headerlink" title="- 在校经历"></a>- <font face="等线">在校经历</font></h3><ul>
+<li><strong>在校担任班长&amp;系体育部部长职位</strong><ul>
+<li>组织班级素质拓展活动；系级篮球、乒乓球比赛</li>
+<li>2013年10月 荣获石家庄铁路职业技术学院“优秀团学干部”称号</li>
+<li>2014年5月 荣获石家庄铁路职业技术学院“优秀共青团员”称号</li>
+<li>2014年6月 考取英语CET4证书</li>
+<li>2015年12月 成为中国共产党党员</li>
+</ul>
+</li>
+<li><strong>校内实践</strong><ul>
+<li>利息计算器、学生奖惩系统等</li>
+</ul>
+</li>
+<li><strong>个人爱好</strong><ul>
+<li>编程、篮球、足球、音乐、美剧</li>
+</ul>
+</li>
+</ul>
+<h3 id="自我评价"><a href="#自我评价" class="headerlink" title="- 自我评价"></a>- <font face="等线">自我评价</font></h3><p>​    我擅长脚踏实地，我也喜欢仰望星空。</p>
+<p>​    在学校时，我竞选班长，学生会部长，积极参加活动比赛；专业课几乎满分，同时还给父亲公司制作利息计算器、为其他系编写学生奖惩系统等。毕业后，我依然不断学习，搭建个人博客、制作个人网站、学习微信公众号、网络爬虫等技术。我已经开始准备报考研究生，因为我想要储存更多的知识。工作中的我，有一点代码洁癖，喜欢整理事物。乐于接触新的技术，迎接挑战。总是愿意和团队或同事默契配合，分享知识，共同进步。</p>
+<p>​    我要把握每一个机会来让自己变得更强。</p>
+<p>​    非常感谢您阅读我的简历，我愿意倾尽所有创造价值！</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;font face=&quot;等线&quot;&gt;学无止境。&lt;/font&gt;
+    
+    </summary>
+    
+      <category term="个人简历" scheme="http://gonethen.github.io/categories/%E4%B8%AA%E4%BA%BA%E7%AE%80%E5%8E%86/"/>
+    
+    
+      <category term="个人简历" scheme="http://gonethen.github.io/tags/%E4%B8%AA%E4%BA%BA%E7%AE%80%E5%8E%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>linux命令</title>
+    <link href="http://gonethen.github.io/2017/02/11/linux%E5%91%BD%E4%BB%A4/"/>
+    <id>http://gonethen.github.io/2017/02/11/linux命令/</id>
+    <published>2017-02-11T08:34:46.474Z</published>
+    <updated>2017-02-14T09:22:40.503Z</updated>
+    
+    <content type="html"><![CDATA[<p>linux常用命令。</p>
+<a id="more"></a>
+<h2 id="uname"><a href="#uname" class="headerlink" title="uname"></a>uname</h2><p>-a或–all ：显示系统全部信息；</p>
+<p>-m或–machine ：显示电脑类型；</p>
+<p>-n或-nodename ：显示在网络上的主机名称；</p>
+<p>-r或–release ：显示操作系统的发行编号；</p>
+<p> -s或–sysname ：显示操作系统名称；</p>
+<p>-v ：显示操作系统的版本；</p>
+<p>-p或–processor ：输出处理器类型或”unknown”；</p>
+<p>-i或–hardware-platform ：输出硬件平台或”unknown”；</p>
+<p>-o或–operating-system ：输出操作系统名称；</p>
+<p>–help ：显示帮助；</p>
+<p>–version ：显示版本信息。</p>
+<h2 id="tar"><a href="#tar" class="headerlink" title="tar"></a>tar</h2><p>-c ：建立一个压缩文件的参数指令(create 的意思)；</p>
+<p>-x ：解开一个压缩文件的参数指令；</p>
+<p>-t ：查看 tarfile 里面的文件；</p>
+<p>-r：向压缩归档文件末尾追加文件；</p>
+<p>-u：更新原压缩包中的文件；</p>
+<p><strong>特别注意，在参数的下达中， c/x/t/r/u 仅能存在一个！不可同时存在！因为不可能同时压缩与解压缩。 </strong></p>
+<p>-z ：用 gzip 压缩；</p>
+<p>-j ：用 bzip2 压缩；</p>
+<p>-v ：显示所有过程；</p>
+<p>-f ：使用档名；</p>
+<p><strong>f 必须是最后一个参数！例如使用『 tar -zcvfP tfile sfile』就是错误的写法，要写成『 tar -zcvPf tfile sfile』才对 </strong></p>
+<p>-p ：使用原文件的原来属性（属性不会依据使用者而变）；</p>
+<p>-P ：可以使用绝对路径来压缩；</p>
+<p>-N ：比后面接的日期(yyyy/mm/dd)还要新的才会被打包进新建的文件中；</p>
+<p>–exclude FILE ：在压缩的过程中，不要将 FILE 打包；</p>
+<h2 id="mkdir"><a href="#mkdir" class="headerlink" title="mkdir"></a>mkdir</h2><p>-Z ：设置安全上下文，当使用SELinux时有效；</p>
+<p>-m&lt;目标属性&gt;或–mode&lt;目标属性&gt; ：建立目录的同时设置目录的权限；</p>
+<p>-p或–parents ：若所要建立目录的上层目录目前尚未建立，则会一并建立上层目录；</p>
+<p>–version ：显示版本信息；</p>
+<h2 id="打开终端快捷键"><a href="#打开终端快捷键" class="headerlink" title="打开终端快捷键"></a>打开终端快捷键</h2><p><code>Ctrl</code> + <code>Alt</code> + <code>T</code> </p>
+<p>☆ 发现一个不错的网站 <a href="http://man.linuxde.net/" target="_blank" rel="external">Linux命令大全</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;linux常用命令。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="技术" scheme="http://gonethen.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="技术" scheme="http://gonethen.github.io/tags/%E6%8A%80%E6%9C%AF/"/>
+    
+      <category term="linux" scheme="http://gonethen.github.io/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>未激活状态时触发改变标签页title</title>
+    <link href="http://gonethen.github.io/2017/01/09/%E6%9C%AA%E6%BF%80%E6%B4%BB%E7%8A%B6%E6%80%81%E6%97%B6%E8%A7%A6%E5%8F%91%E6%94%B9%E5%8F%98%E6%A0%87%E7%AD%BE%E9%A1%B5title/"/>
+    <id>http://gonethen.github.io/2017/01/09/未激活状态时触发改变标签页title/</id>
+    <published>2017-01-09T09:03:25.599Z</published>
+    <updated>2017-01-09T09:21:17.759Z</updated>
+    
+    <content type="html"><![CDATA[<p>document.addEventListener(‘visibilitychange’,function(){});</p>
+<a id="more"></a>
+<p>其实很简单。</p>
+<p>其实很自然。</p>
+<p>添加<code>visibilitychange</code>事件的监听：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">document</span>.addEventListener(<span class="string">'visibilitychange'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">if</span>(<span class="built_in">document</span>.visibilityState==<span class="string">'hidden'</span>) &#123;</div><div class="line">		normal_title=<span class="built_in">document</span>.title;</div><div class="line">		<span class="built_in">document</span>.title=<span class="string">'(●\'◡\'●)'</span>;</div><div class="line">	&#125;<span class="keyword">else</span>&#123;</div><div class="line">		<span class="built_in">document</span>.title=normal_title;</div><div class="line">	&#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;document.addEventListener(‘visibilitychange’,function(){});&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="技术" scheme="http://gonethen.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="技术" scheme="http://gonethen.github.io/tags/%E6%8A%80%E6%9C%AF/"/>
+    
+      <category term="html" scheme="http://gonethen.github.io/tags/html/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>关于Oracle里的(+)</title>
+    <link href="http://gonethen.github.io/2016/12/29/%E5%85%B3%E4%BA%8EOracle%E9%87%8C%E7%9A%84(+)/"/>
+    <id>http://gonethen.github.io/2016/12/29/关于Oracle里的(+)/</id>
+    <published>2016-12-29T01:57:45.205Z</published>
+    <updated>2016-12-29T04:17:58.782Z</updated>
+    
+    <content type="html"><![CDATA[<p>+表示补充，即哪个表有加号，这个表就是匹配表。</p>
+<a id="more"></a>
+<p>加号写在右表，左表就是全部显示，故是左连接。</p>
+<p>注意： 用（+） 就要用关键字where</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;+表示补充，即哪个表有加号，这个表就是匹配表。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="技术" scheme="http://gonethen.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="技术" scheme="http://gonethen.github.io/tags/%E6%8A%80%E6%9C%AF/"/>
+    
+      <category term="Oracle" scheme="http://gonethen.github.io/tags/Oracle/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>分裂 - 周杰伦</title>
+    <link href="http://gonethen.github.io/2016/12/27/%E5%88%86%E8%A3%82-%E5%91%A8%E6%9D%B0%E4%BC%A6/"/>
+    <id>http://gonethen.github.io/2016/12/27/分裂-周杰伦/</id>
+    <published>2016-12-27T13:09:31.432Z</published>
+    <updated>2016-12-27T14:43:49.862Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote class="blockquote-center"><p>基于两种立场我会罩着你。</p>
+</blockquote>
+<a id="more"></a>
+<blockquote>
+<p>分裂 - 周杰伦</p>
+<p>词：周杰伦<br>曲：周杰伦</p>
+<p>坐着我的摩托车<br>载你缓缓的离开<br>考不上的好学校<br>可以不微笑就走<br>把手慢慢交给我<br>放下心中的困惑<br>雨点从两旁划过<br>割开两种精神的我<br>经过老伯的家<br>篮框变得好高<br>爬过的那棵树<br>又何时变得渺小<br>这样也好<br>开始没人注意到我<br>等雨变强之前<br>我们将会分化软弱</p>
+<p>趁时间没发觉<br>让我带着你离开<br>没有了证明<br>没有了空虚<br>基于两种立场我会罩着你<br>趁时间没发觉<br>让我带着你离开<br>这不是顽固<br>这不是逃避<br>没人绑着你走才快乐</p>
+<p>坐着我的摩托车<br>载你缓缓的离开<br>考不上的好学校<br>可以不微笑就走<br>把手慢慢交给我<br>放下心中的困惑<br>雨点从两旁划过<br>割开两种精神的我<br>经过老伯的家<br>篮框变得好高<br>爬过的那棵树<br>又何时变得渺小<br>这样也好<br>开始没人注意到你我<br>等雨变强之前<br>我们将会分化软弱</p>
+<p>趁时间没发觉<br>让我带着你离开<br>没有了证明<br>没有了空虚<br>基于两种立场我会罩着你<br>趁时间没发觉<br>让我带着你离开<br>这不是顽固<br>这不是逃避<br>没人绑着你走才快乐</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote class=&quot;blockquote-center&quot;&gt;&lt;p&gt;基于两种立场我会罩着你。&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="音乐" scheme="http://gonethen.github.io/categories/%E9%9F%B3%E4%B9%90/"/>
+    
+    
+      <category term="周杰伦" scheme="http://gonethen.github.io/tags/%E5%91%A8%E6%9D%B0%E4%BC%A6/"/>
+    
+      <category term="音乐" scheme="http://gonethen.github.io/tags/%E9%9F%B3%E4%B9%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>年关将至</title>
+    <link href="http://gonethen.github.io/2016/12/27/%E5%B9%B4%E5%85%B3%E5%B0%86%E8%87%B3/"/>
+    <id>http://gonethen.github.io/2016/12/27/年关将至/</id>
+    <published>2016-12-27T07:58:21.441Z</published>
+    <updated>2016-12-27T08:15:04.259Z</updated>
+    
+    <content type="html"><![CDATA[<p>是的，又要过年了。</p>
+<p>然而有一件事我还是没搞明白，我到底几岁了？</p>
+<a id="more"></a>
+<p>我是1993年9月出生，按周岁计算</p>
+<p>94年9月满一岁，95年满两岁，96年满三岁…</p>
+<p>依此类推，到2016年9月，我满廿三岁…</p>
+<p>刚刚又看了一下日历，明年是鸡年</p>
+<p>正好我廿四岁，生肖两轮，没毛病</p>
+<p>前段时间一直感觉自己已经廿六了，这是为什么？</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;是的，又要过年了。&lt;/p&gt;
+&lt;p&gt;然而有一件事我还是没搞明白，我到底几岁了？&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="日志" scheme="http://gonethen.github.io/categories/%E6%97%A5%E5%BF%97/"/>
+    
+    
+      <category term="日志" scheme="http://gonethen.github.io/tags/%E6%97%A5%E5%BF%97/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://gonethen.github.io/2016/12/14/hello-world/"/>
+    <id>http://gonethen.github.io/2016/12/14/hello-world/</id>
+    <published>2016-12-14T10:01:32.504Z</published>
+    <updated>2016-12-27T03:48:17.399Z</updated>
+    
+    <content type="html"><![CDATA[<p>无意中发现了<strong>Hexo</strong>。</p>
+<p>然后经过三四天的折腾，终于创建出了这个个人博客小站。</p>
+<a id="more"></a>
+<h2 id="HELLO-WORLD"><a href="#HELLO-WORLD" class="headerlink" title="HELLO WORLD"></a>HELLO WORLD</h2><p><img src="http://ww2.sinaimg.cn/bmiddle/88070423gw1ep30aw8an7g204d04gkgd.gif" alt="img"></p>
+<div style="text-align:center;"><a href="http://ww2.sinaimg.cn/bmiddle/88070423gw1ep30aw8an7g204d04gkgd.gif" target="_blank" rel="external">女神在玩你来比划我来猜，PS: 机器猫有耳朵吗？</a></div>
+
+<blockquote class="blockquote-center"><p>当你不知道说什么的时候，可以写下这段话，然后在最后署一个名人的人名，就像这样。</p>
+<p>​                                        —— 罗素· 罗兰</p>
+</blockquote>
+<p>顺便学习了一下markdown语法。</p>
+<ul>
+<li><p>markdown 语法</p>
+<p>​    标题：<code>## title##</code></p>
+<p>​    列表：<code>-</code> 或 <code>*</code> 或 <code>1.</code></p>
+<p>​    引用：<code>&gt;</code></p>
+<p>​    分割线：<code>---</code> 或 <code>***</code></p>
+<p>​    加粗：<code>**text**</code></p>
+<p>​    斜体：<code>*text*</code> 或 <code>_text_</code></p>
+<p>​    图片：<code>![imgTitle](imgUrl){ImgCap}{/ImgCap}</code></p>
+<p>​    链接：<code>[urlText](url)</code></p>
+<p>​    代码：两个``</p>
+<p>​    more：<code>&lt;!--more--&gt;</code></p>
+<p>​    上角标：<code>&lt;sup&gt;GONETHEN&lt;/sup&gt;</code></p>
+<p>​    下角标：<code>&lt;sub&gt;GONETHEN&lt;/sub&gt;</code></p>
+<p>​</p>
+<p>​</p>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;无意中发现了&lt;strong&gt;Hexo&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;然后经过三四天的折腾，终于创建出了这个个人博客小站。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="日志" scheme="http://gonethen.github.io/categories/%E6%97%A5%E5%BF%97/"/>
+    
+    
+      <category term="日志" scheme="http://gonethen.github.io/tags/%E6%97%A5%E5%BF%97/"/>
+    
+  </entry>
+  
+</feed>
