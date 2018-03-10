@@ -98,17 +98,17 @@
 
 
 
-<meta name="description" content="hexo deploy时报错/dev/tty: No such device or address很久没有写博客了吧？">
+<meta name="description" content="很久没有写博客了吧？">
 <meta property="og:type" content="article">
 <meta property="og:title" content="/dev/tty No such device or address">
 <meta property="og:url" content="http://gonethen.github.io/2018/03/10/hexo的一个问题/index.html">
 <meta property="og:site_name" content="THE">
-<meta property="og:description" content="hexo deploy时报错/dev/tty: No such device or address很久没有写博客了吧？">
+<meta property="og:description" content="很久没有写博客了吧？">
 <meta property="og:image" content="https://pic3.zhimg.com/80/0583869f38758783337aea67812d6f11_hd.jpg">
-<meta property="og:updated_time" content="2018-03-10T14:05:47.925Z">
+<meta property="og:updated_time" content="2018-03-10T14:09:21.109Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="/dev/tty No such device or address">
-<meta name="twitter:description" content="hexo deploy时报错/dev/tty: No such device or address很久没有写博客了吧？">
+<meta name="twitter:description" content="很久没有写博客了吧？">
 <meta name="twitter:image" content="https://pic3.zhimg.com/80/0583869f38758783337aea67812d6f11_hd.jpg">
 
 
@@ -367,7 +367,7 @@
       
 
       
-        <h2 id="hexo-deploy时报错-dev-tty-No-such-device-or-address"><a href="#hexo-deploy时报错-dev-tty-No-such-device-or-address" class="headerlink" title="hexo deploy时报错/dev/tty: No such device or address"></a>hexo deploy时报错/dev/tty: No such device or address</h2><p>很久没有写博客了吧？</p>
+        <p>很久没有写博客了吧？</p>
 <a id="more"></a>
 <ul>
 <li><p>症状</p>
@@ -380,11 +380,8 @@
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="attr">deploy:</span></div><div class="line"></div><div class="line"><span class="attr">   type:</span> git</div><div class="line"></div><div class="line"><span class="attr">   repo:</span> https://github.com/&#123;yourname&#125;/&#123;yourname&#125;.github.io.git</div><div class="line"></div><div class="line"><span class="attr">   branch:</span> master</div></pre></td></tr></table></figure>
 <p>改成这样</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="attr">deploy:</span> </div><div class="line"></div><div class="line"><span class="attr">   type:</span> git</div><div class="line"></div><div class="line"><span class="attr">   repo:</span> https://&#123;yourname&#125;:&#123;yourpassword&#125;@github.com/&#123;yourname&#125;/&#123;yourname&#125;.github.io.git</div><div class="line"></div><div class="line"><span class="attr">   branch:</span> master</div></pre></td></tr></table></figure>
-<p>​</p>
 </li>
 </ul>
-<p>ps:</p>
-<p>写markdown文档的title的时候注意:要转义哦</p>
 
       
     </div>
@@ -515,17 +512,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/jay.jpg"
@@ -623,22 +611,6 @@
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#hexo-deploy时报错-dev-tty-No-such-device-or-address"><span class="nav-number">1.</span> <span class="nav-text">hexo deploy时报错/dev/tty: No such device or address</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
     </div>
