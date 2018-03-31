@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://gonethen.github.io/"/>
-  <updated>2018-03-10T14:09:21.109Z</updated>
+  <updated>2017-04-20T11:59:35.869Z</updated>
   <id>http://gonethen.github.io/</id>
   
   <author>
@@ -14,6 +14,220 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>学习JavaFX之路(1) - HELLO JavaFX</title>
+    <link href="http://gonethen.github.io/2018/03/31/%E5%AD%A6%E4%B9%A0JavaFX%E4%B9%8B%E8%B7%AF(1)%20-%20HELLO%20JavaFX/"/>
+    <id>http://gonethen.github.io/2018/03/31/学习JavaFX之路(1) - HELLO JavaFX/</id>
+    <published>2018-03-31T06:23:54.648Z</published>
+    <updated>2017-04-20T11:59:35.869Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>Hello JavaFX.</strong></p>
+<a id="more"></a>
+<h2 id="HELLO-JavaFX"><a href="#HELLO-JavaFX" class="headerlink" title="HELLO JavaFX"></a>HELLO JavaFX</h2><h3 id="什么是JavaFX"><a href="#什么是JavaFX" class="headerlink" title="什么是JavaFX"></a>什么是JavaFX</h3><p>JavaFX是一个强大的图形和多媒体处理工具包集合，它允许开发者来设计、创建、测试、调试和部署富客户端程序，早已加入Java8豪华午餐。</p>
+<p>谁说Java不能开发桌面应用程序？</p>
+<h3 id="JavaFX基本结构"><a href="#JavaFX基本结构" class="headerlink" title="JavaFX基本结构"></a>JavaFX基本结构</h3><ul>
+<li>JavaFX运行主类继承自<code>javafx.application.Application</code>类，start()方法是所有JavaFX应用程序的入口。</li>
+<li>JavaFX应用程序将UI容器定义为舞台(Stage)与场景(Scene)。Stage类是JavaFX顶级容器。Scene类是所有内容的容器。</li>
+</ul>
+<h3 id="Hello-JavaFX"><a href="#Hello-JavaFX" class="headerlink" title="Hello JavaFX"></a>Hello JavaFX</h3><p>直接上代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> <span class="keyword">extends</span> <span class="title">Application</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">start</span><span class="params">(Stage primaryStage)</span> <span class="keyword">throws</span> Exception</span>&#123;</div><div class="line">        Button btn = <span class="keyword">new</span> Button();</div><div class="line">        btn.setText(<span class="string">"说你好"</span>);</div><div class="line">        btn.setOnAction(<span class="keyword">new</span> EventHandler&lt;ActionEvent&gt;() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handle</span><span class="params">(ActionEvent event)</span> </span>&#123;</div><div class="line">                System.out.println(<span class="string">"你好"</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        StackPane root = <span class="keyword">new</span> StackPane();</div><div class="line">        root.getChildren().add(btn);</div><div class="line">        Scene scene = <span class="keyword">new</span> Scene(root,<span class="number">300</span>,<span class="number">250</span>);</div><div class="line">        primaryStage.setScene(scene);</div><div class="line">        primaryStage.setTitle(<span class="string">"你好"</span>);</div><div class="line">        primaryStage.show();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        launch(args);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>在JavaFX中，Scene中的内容会以由图形节点(Node)构成的分层场景图(Scene Graph)来展现。在本例中，root节点是一个StackPane对象，它是一个可以调整大小的layout节点。这就意味着在用户改变stage大小时，root节点可以随scene的大小变化而变化。</li>
+<li>root节点包含一个带文本的按钮子节点，按钮上添加了一个事件处理器(Event Handler)，它在点击按钮时会向控制台输出信息。</li>
+<li>当JavaFX应用程序是通过JavaFX Packager工具打包时，main()方法就不是必需的的了，因为JavaFX Package工具会将JavaFX Launcher嵌入到JAR文件中。但是保留main()方法还是很有用的，这样你可以运行不带有JavaFX Launcher的JAR文件，例如在使用某些没有将JavaFX工具完全集成进去的IDE时。另外嵌入了JavaFX代码的Swing应用程序仍需要main()方法。</li>
+</ul>
+<h3 id="JavaFX打包成exe"><a href="#JavaFX打包成exe" class="headerlink" title="JavaFX打包成exe"></a>JavaFX打包成exe</h3><p><strong>1. 生成jar的命令：javapackager -createjar</strong></p>
+<blockquote>
+<p>javapackager -createjar -appclass Test -srcdir classes -outdir archive -outfile Test.jar</p>
+</blockquote>
+<p>参数说明：</p>
+<ul>
+<li>-appclass Test<br>指定应用程序主类Test</li>
+<li>-srcdir classes<br>指定源目录classes</li>
+<li>-outdir archive<br>指定输出目录archive</li>
+<li>-outfile Test.jar<br>指定输出文件名Test.jar</li>
+</ul>
+<p><strong>2. 生成exe的命令：javapackager -deploy</strong></p>
+<blockquote>
+<p>javapackager -deploy -appclass Test -native image -srcdir archive -outdir deploy -outfile Test -Bruntime=$JAVA_HOME/jre</p>
+</blockquote>
+<p>参数说明：</p>
+<ul>
+<li><p>-appclass Test</p>
+<p>指定应用程序主类Test</p>
+</li>
+<li><p>-native image<br>指定输出的本地程序类型，image代表只生成一个启动器(exe)，也有别的选项可以生成安装程序等等(需要第三方工具)</p>
+</li>
+<li><p>-srcdir archive<br>指定源目录，这里指刚才打包存放jar文件的目录</p>
+</li>
+<li><p>-outdir deploy<br>指定输出目录deploy</p>
+</li>
+<li><p>-outfile Test<br>指定输出文件名Test</p>
+</li>
+<li><p>-Bruntime=$JAVA_HOME/jre<br>指定打包出来的独立程序使用的jre的位置，如果用的是cmd的话写成%JAVA_HOME%\jre<br>也可以指定别的jre，但是要小心保证javapackager所在的jdk和所使用的jre的位数相同(即都是32位或都是64位，最好版本也相同，最最好就直接用jdk自带的jre)</p>
+</li>
+</ul>
+<p>注：本文部分内容转载自 <a href="http://www.javafxchina.net/blog/2015/06/doc01_helloworldstype/" target="_blank" rel="external">javafxchina</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;Hello JavaFX.&lt;/strong&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="技术" scheme="http://gonethen.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="JavaFx" scheme="http://gonethen.github.io/tags/JavaFx/"/>
+    
+      <category term="桌面应用" scheme="http://gonethen.github.io/tags/%E6%A1%8C%E9%9D%A2%E5%BA%94%E7%94%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>本地重新关联githubPage</title>
+    <link href="http://gonethen.github.io/2018/03/31/%E6%9C%AC%E5%9C%B0%E9%87%8D%E6%96%B0%E5%85%B3%E8%81%94githubPage/"/>
+    <id>http://gonethen.github.io/2018/03/31/本地重新关联githubPage/</id>
+    <published>2018-03-31T06:23:54.632Z</published>
+    <updated>2017-04-19T12:04:17.642Z</updated>
+    
+    <content type="html"><![CDATA[<p><code>git clone git@github.com:yourname/yourname.github.io.git</code></p>
+<a id="more"></a>
+<p>自己平时没事喜欢整理电脑，难免会误删个文件什么的，导致某个功能或应用不能正常使用。</p>
+<p>这不昨天cclearner清理了一下，莫名的把原来hexo文件夹下的.git文件夹清理没了，后来干脆卸了git，卸了node.js，今天<strong>学习</strong>的时候突然想写博客，然后想起自己的博客环境快弄没了，索性全部重新装了一遍。</p>
+<p>其实不用</p>
+<p>在<a href="http://crazymilk.github.io/2015/12/28/GitHub-Pages-Hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/#more" target="_blank" rel="external">这篇博文的最后</a>有说：</p>
+<blockquote>
+<ol>
+<li>使用<code>git clone git@github.com:yourname/yourname.github.io.git</code>拷贝仓库；</li>
+<li>在本地新拷贝的<code>yourname.github.io</code>文件夹下通过Git bash依次执行下列指令：<code>npm install hexo</code>、<code>npm install</code>、<code>npm install hexo-deployer-git</code>（记得，不需要<code>hexo init</code>这条指令）。</li>
+</ol>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;code&gt;git clone git@github.com:yourname/yourname.github.io.git&lt;/code&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="github" scheme="http://gonethen.github.io/categories/github/"/>
+    
+    
+      <category term="github" scheme="http://gonethen.github.io/tags/github/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>IDEA2017破解</title>
+    <link href="http://gonethen.github.io/2018/03/31/IDEA2017%E7%A0%B4%E8%A7%A3/"/>
+    <id>http://gonethen.github.io/2018/03/31/IDEA2017破解/</id>
+    <published>2018-03-31T06:23:54.616Z</published>
+    <updated>2017-04-20T12:54:41.446Z</updated>
+    
+    <content type="html"><![CDATA[<p>有钱就去买正版。</p>
+<a id="more"></a>
+<h2 id="IDEA2017破解"><a href="#IDEA2017破解" class="headerlink" title="IDEA2017破解"></a>IDEA2017破解</h2><h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><p>​    下载<a href="http://www.jetbrains.com/" target="_blank" rel="external">IDEA</a></p>
+<p>​    下载<a href="http://idea.lanyus.com/jar/JetbrainsCrack-2.6.2.jar" target="_blank" rel="external">破解补丁JetbrainsCrack-2.6.2.jar</a></p>
+<h3 id="开始破解"><a href="#开始破解" class="headerlink" title="开始破解"></a>开始破解</h3><ol>
+<li><p>安装IDEA，我安装到了<code>D:\Program Files\JetBrains\IntelliJ IDEA 2017.1.1</code> 。</p>
+</li>
+<li><p>将下载好的<code>JetbrainsCrack-2.6.2.jar</code>放到IDEA安装目录下的<code>bin</code>文件夹。</p>
+<p><img src="http://i4.buimg.com/4851/02eded99c9b9655e.png" alt="将下载好的JetbrainsCrack-2.6.2.jar放到IDEA安装目录下的bin文件夹"></p>
+</li>
+<li><p><code>bin</code>目录下面有2个文件： <code>idea.exe.vmoptions</code>和<code>idea64.exe.vmoptions</code>，分别用记事本打开，在最后添加一行代码：</p>
+<p><code>-javaagent:D:\Program Files\JetBrains\IntelliJ IDEA 2017.1.1\bin\JetbrainsCrack-2.6.2.jar</code></p>
+<p>“D:\Program Files\JetBrains\IntelliJ IDEA 2017.1.1\bin\JetbrainsCrack-2.6.2.jar”是对应的JetbrainsCrack-2.6.2.jar的位置。</p>
+<p><img src="http://i4.buimg.com/4851/8ee4867a96b630b4.png" alt="修改.vmoptions文件"></p>
+</li>
+<li><p>重启一下软件，在进入出现有active code选择界面的时候  写入下面的代码：(到2099年到期)</p>
+<blockquote>
+<p>ThisCrackLicenseId-{<br>“licenseId”:”ThisCrackLicenseId”,<br>“licenseeName”:”idea”,<br>“assigneeName”:””,<br>“assigneeEmail”:”idea@163.com”,<br>“licenseRestriction”:”For This Crack, Only Test! Please support genuine!!!”,<br>“checkConcurrentUse”:false,<br>“products”:[<br>{“code”:”II”,”paidUpTo”:”2099-12-31”},<br>{“code”:”DM”,”paidUpTo”:”2099-12-31”},<br>{“code”:”AC”,”paidUpTo”:”2099-12-31”},<br>{“code”:”RS0”,”paidUpTo”:”2099-12-31”},<br>{“code”:”WS”,”paidUpTo”:”2099-12-31”},<br>{“code”:”DPN”,”paidUpTo”:”2099-12-31”},<br>{“code”:”RC”,”paidUpTo”:”2099-12-31”},<br>{“code”:”PS”,”paidUpTo”:”2099-12-31”},<br>{“code”:”DC”,”paidUpTo”:”2099-12-31”},<br>{“code”:”RM”,”paidUpTo”:”2099-12-31”},<br>{“code”:”CL”,”paidUpTo”:”2099-12-31”},<br>{“code”:”PC”,”paidUpTo”:”2099-12-31”}<br>],<br>“hash”:”2911276/0”,<br>“gracePeriodDays”:7,<br>“autoProlongated”:false}</p>
+</blockquote>
+</li>
+<li><p>破解成功，进入应用界面。</p>
+<p><img src="http://i4.buimg.com/4851/911fa902ec688030.png" alt="进入应用界面"></p>
+</li>
+</ol>
+<p>​</p>
+<p>​</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;有钱就去买正版。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="技术" scheme="http://gonethen.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="IDEA" scheme="http://gonethen.github.io/tags/IDEA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>学习JavaFX之路(2) - 简单的登录窗口</title>
+    <link href="http://gonethen.github.io/2018/03/31/%E5%AD%A6%E4%B9%A0JavaFX%E4%B9%8B%E8%B7%AF(2)%20-%20%E7%AE%80%E5%8D%95%E7%9A%84%E7%99%BB%E5%BD%95%E7%AA%97%E5%8F%A3/"/>
+    <id>http://gonethen.github.io/2018/03/31/学习JavaFX之路(2) - 简单的登录窗口/</id>
+    <published>2018-03-31T06:23:54.585Z</published>
+    <updated>2017-04-22T07:22:50.524Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>GridPane/Text/Label/TextField/PasswordField/Button/HBox</strong></p>
+<a id="more"></a>
+<h2 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h2><h3 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> <span class="keyword">extends</span> <span class="title">Application</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">start</span><span class="params">(Stage primaryStage)</span> <span class="keyword">throws</span> Exception</span>&#123;</div><div class="line"><span class="comment">//        2.登录</span></div><div class="line">        primaryStage.setTitle(<span class="string">"登录"</span>);</div><div class="line">        GridPane gridPane = <span class="keyword">new</span> GridPane();</div><div class="line">        gridPane.setAlignment(Pos.CENTER);<span class="comment">//将grid的默认位置从靠左上角对齐改为居中</span></div><div class="line">        gridPane.setHgap(<span class="number">10</span>);<span class="comment">//列之间的间隔</span></div><div class="line">        gridPane.setVgap(<span class="number">10</span>);<span class="comment">//行之间的间隔</span></div><div class="line">        gridPane.setPadding(<span class="keyword">new</span> Insets(<span class="number">25</span>,<span class="number">25</span>,<span class="number">25</span>,<span class="number">25</span>));<span class="comment">//指定了上、右、下、左四边的间隔</span></div><div class="line"></div><div class="line">        Text sceneTitle = <span class="keyword">new</span> Text(<span class="string">"Welcome!"</span>);<span class="comment">//不可编辑的Text对象</span></div><div class="line">        sceneTitle.setFont(Font.font(<span class="string">"Tahoma"</span>, FontWeight.NORMAL,<span class="number">20</span>));<span class="comment">//设置字体</span></div><div class="line">        gridPane.add(sceneTitle,<span class="number">0</span>,<span class="number">0</span>,<span class="number">2</span>,<span class="number">1</span>);<span class="comment">//添加到GridPane</span></div><div class="line">        Label userName = <span class="keyword">new</span> Label(<span class="string">"用户名："</span>);<span class="comment">//Label</span></div><div class="line">        gridPane.add(userName,<span class="number">0</span>,<span class="number">1</span>);</div><div class="line">        TextField userTextField = <span class="keyword">new</span> TextField();<span class="comment">//文本框</span></div><div class="line">        gridPane.add(userTextField,<span class="number">1</span>,<span class="number">1</span>);</div><div class="line">        Label password = <span class="keyword">new</span> Label(<span class="string">"密码："</span>);</div><div class="line">        gridPane.add(password,<span class="number">0</span>,<span class="number">2</span>);</div><div class="line">        PasswordField passwordField = <span class="keyword">new</span> PasswordField();<span class="comment">//密码框</span></div><div class="line">        gridPane.add(passwordField,<span class="number">1</span>,<span class="number">2</span>);</div><div class="line">        Button btn = <span class="keyword">new</span> Button(<span class="string">"登入"</span>);<span class="comment">//按钮</span></div><div class="line">        HBox hbBtn = <span class="keyword">new</span> HBox(<span class="number">10</span>);<span class="comment">//HBox布局面板，它的spacing被设置为10像素</span></div><div class="line">        hbBtn.setAlignment(Pos.BOTTOM_RIGHT);<span class="comment">//居右下，HBox面板为按钮设置了与grid面板中其它控件不同的对齐方式</span></div><div class="line">        hbBtn.getChildren().add(btn);<span class="comment">//将按钮控件作为子节点</span></div><div class="line">        gridPane.add(hbBtn, <span class="number">1</span>, <span class="number">4</span>);<span class="comment">//将HBox pane放到grid中的第1列，第4行</span></div><div class="line">        <span class="keyword">final</span> Text actionTarget = <span class="keyword">new</span> Text();<span class="comment">//增加用于显示信息的文本</span></div><div class="line">        gridPane.add(actionTarget, <span class="number">1</span>, <span class="number">6</span>);</div><div class="line">        btn.setOnAction(<span class="keyword">new</span> EventHandler&lt;ActionEvent&gt;() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handle</span><span class="params">(ActionEvent event)</span> </span>&#123;</div><div class="line">                actionTarget.setText(<span class="string">"你的密码是："</span>+passwordField.getText());</div><div class="line">                actionTarget.setFill(Color.FIREBRICK);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line"></div><div class="line">        Scene scene = <span class="keyword">new</span> Scene(gridPane,<span class="number">300</span>,<span class="number">350</span>);<span class="comment">//grid pane作为root节点</span></div><div class="line"></div><div class="line">        primaryStage.setScene(scene);</div><div class="line">        primaryStage.show();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        launch(args);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="GRIDPANE-LAYOUT"><a href="#GRIDPANE-LAYOUT" class="headerlink" title="GRIDPANE LAYOUT"></a>GRIDPANE LAYOUT</h3><ul>
+<li><p>GridPane：一个灵活的行列网格来对控件进行布局</p>
+<ul>
+<li><p>setAlignment：将grid的默认位置从靠左上角对齐改为Pos.CENTER(居中)显示</p>
+</li>
+<li><p>setVgap/setHgap：管理行/列之间的间隔</p>
+</li>
+<li><p>setPadding：管理grid面板边缘周围的间隔</p>
+</li>
+<li><p>insets：分别指定了上、右、下、左四边的间隔</p>
+</li>
+<li><p>add：添加子节点控件</p>
+<p>Node child：子节点对象；int columnIndex：列索引；int rowIndex：行索引；int colspan：跨列数(可选)；int rowspan：跨行数(可选)</p>
+</li>
+</ul>
+<p>以上参数我们可以通过下面这张图来理解：</p>
+<p><img src="http://www.javafxchina.net/blog/wp-content/uploads/2015/06/4_2-login_gridlines_co.png" alt="gridPane布局"></p>
+</li>
+</ul>
+<h3 id="添加子节点控件"><a href="#添加子节点控件" class="headerlink" title="添加子节点控件"></a>添加子节点控件</h3><ul>
+<li>Text：不可编辑的文本</li>
+<li>setFont：设置变量的family(字体)、fontWeight(字重粗细)和size(字号)</li>
+<li>Label：Label标签，等同于html的<code>&lt;label&gt;&lt;/label&gt;</code></li>
+<li>TextField：文本域输入框，等同于html的<code>&lt;input type=&quot;text&quot;/&gt;</code></li>
+<li>PasswordField：密码输入框，等同于html的<code>&lt;input type=&quot;password&quot;/&gt;</code></li>
+<li>Button：按钮<code>&lt;input type=&quot;button&quot;/&gt;</code></li>
+<li>HBox：布局面板，为按钮设置了与grid面板中其它控件不同的对齐方式</li>
+</ul>
+<h3 id="添加按钮点击事件"><a href="#添加按钮点击事件" class="headerlink" title="添加按钮点击事件"></a>添加按钮点击事件</h3><ul>
+<li>创建Text对象actionTarget，初始化没有任何文字</li>
+<li>在button的setOnAction方法里对actionTarget进行文本赋值(setText)以及设置字体颜色(setFill)</li>
+</ul>
+<h3 id="最终效果"><a href="#最终效果" class="headerlink" title="最终效果"></a>最终效果</h3><p><img src="http://i1.piimg.com/4851/7c95c5838b82d4f9.png" alt="登录最终效果"></p>
+<p>注：本文部分内容转载自 <a href="http://www.javafxchina.net/blog/2015/06/doc01_form/" target="_blank" rel="external">javafxchina</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;strong&gt;GridPane/Text/Label/TextField/PasswordField/Button/HBox&lt;/strong&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="技术" scheme="http://gonethen.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="JavaFx" scheme="http://gonethen.github.io/tags/JavaFx/"/>
+    
+      <category term="桌面应用" scheme="http://gonethen.github.io/tags/%E6%A1%8C%E9%9D%A2%E5%BA%94%E7%94%A8/"/>
+    
+  </entry>
   
   <entry>
     <title>/dev/tty No such device or address</title>
@@ -100,7 +314,7 @@
     <link href="http://gonethen.github.io/2017/02/26/%E4%B8%AA%E4%BA%BA%E7%AE%80%E5%8E%86/"/>
     <id>http://gonethen.github.io/2017/02/26/个人简历/</id>
     <published>2017-02-26T13:26:03.804Z</published>
-    <updated>2018-03-17T07:25:56.651Z</updated>
+    <updated>2018-03-17T07:26:42.908Z</updated>
     
     <content type="html"><![CDATA[<font face="等线">我要一步一步往上爬，在最高点乘着叶片往前飞。</font>
 
@@ -113,6 +327,8 @@
 <li>政治面貌：党员</li>
 <li>毕业院校：石家庄铁路职业技术学院 - 软件技术</li>
 <li>工作经验：3年</li>
+<li>电子邮箱：gonethen@163.com</li>
+<li>联系电话：18731152252</li>
 </ul>
 <h3 id="专业技能"><a href="#专业技能" class="headerlink" title="- 专业技能"></a>- <font face="等线">专业技能</font></h3><ol>
 <li>熟练掌握 Java、Servlet、Jsp、JavaScript、JQuery、Ajax、JSTL等技术</li>

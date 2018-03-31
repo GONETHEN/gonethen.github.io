@@ -80,7 +80,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="技术,Oracle," />
+  <meta name="keywords" content="JavaFx,桌面应用," />
 
 
 
@@ -98,16 +98,19 @@
 
 
 
-<meta name="description" content="+表示补充，即哪个表有加号，这个表就是匹配表。">
+<meta name="description" content="GridPane/Text/Label/TextField/PasswordField/Button/HBox">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于Oracle里的(+)">
-<meta property="og:url" content="http://gonethen.github.io/2016/12/29/关于Oracle里的(+)/index.html">
+<meta property="og:title" content="学习JavaFX之路(2) - 简单的登录窗口">
+<meta property="og:url" content="http://gonethen.github.io/2018/03/31/学习JavaFX之路(2) - 简单的登录窗口/index.html">
 <meta property="og:site_name" content="THE">
-<meta property="og:description" content="+表示补充，即哪个表有加号，这个表就是匹配表。">
-<meta property="og:updated_time" content="2016-12-29T04:17:58.782Z">
+<meta property="og:description" content="GridPane/Text/Label/TextField/PasswordField/Button/HBox">
+<meta property="og:image" content="http://www.javafxchina.net/blog/wp-content/uploads/2015/06/4_2-login_gridlines_co.png">
+<meta property="og:image" content="http://i1.piimg.com/4851/7c95c5838b82d4f9.png">
+<meta property="og:updated_time" content="2017-04-22T07:22:50.524Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于Oracle里的(+)">
-<meta name="twitter:description" content="+表示补充，即哪个表有加号，这个表就是匹配表。">
+<meta name="twitter:title" content="学习JavaFX之路(2) - 简单的登录窗口">
+<meta name="twitter:description" content="GridPane/Text/Label/TextField/PasswordField/Button/HBox">
+<meta name="twitter:image" content="http://www.javafxchina.net/blog/wp-content/uploads/2015/06/4_2-login_gridlines_co.png">
 
 
 
@@ -135,13 +138,13 @@
 
 
 
-  <link rel="canonical" href="http://gonethen.github.io/2016/12/29/关于Oracle里的(+)/"/>
+  <link rel="canonical" href="http://gonethen.github.io/2018/03/31/学习JavaFX之路(2) - 简单的登录窗口/"/>
 
 
 
 
 
-  <title> 关于Oracle里的(+) | THE </title>
+  <title> 学习JavaFX之路(2) - 简单的登录窗口 | THE </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -262,7 +265,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://gonethen.github.io/2016/12/29/关于Oracle里的(+)/">
+  <link itemprop="mainEntityOfPage" href="http://gonethen.github.io/2018/03/31/学习JavaFX之路(2) - 简单的登录窗口/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="GONETHEN">
@@ -286,7 +289,7 @@
             
             
               
-                关于Oracle里的(+)
+                学习JavaFX之路(2) - 简单的登录窗口
               
             
           </h1>
@@ -299,8 +302,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-29T09:57:45+08:00">
-                2016-12-29
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-31T14:23:54+08:00">
+                2018-03-31
               </time>
             
 
@@ -333,8 +336,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/12/29/关于Oracle里的(+)/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/29/关于Oracle里的(+)/" itemprop="commentCount"></span>
+                <a href="/2018/03/31/学习JavaFX之路(2) - 简单的登录窗口/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/03/31/学习JavaFX之路(2) - 简单的登录窗口/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -365,10 +368,43 @@
       
 
       
-        <p>+表示补充，即哪个表有加号，这个表就是匹配表。</p>
+        <p><strong>GridPane/Text/Label/TextField/PasswordField/Button/HBox</strong></p>
 <a id="more"></a>
-<p>加号写在右表，左表就是全部显示，故是左连接。</p>
-<p>注意： 用（+） 就要用关键字where</p>
+<h2 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h2><h3 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> <span class="keyword">extends</span> <span class="title">Application</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">start</span><span class="params">(Stage primaryStage)</span> <span class="keyword">throws</span> Exception</span>&#123;</div><div class="line"><span class="comment">//        2.登录</span></div><div class="line">        primaryStage.setTitle(<span class="string">"登录"</span>);</div><div class="line">        GridPane gridPane = <span class="keyword">new</span> GridPane();</div><div class="line">        gridPane.setAlignment(Pos.CENTER);<span class="comment">//将grid的默认位置从靠左上角对齐改为居中</span></div><div class="line">        gridPane.setHgap(<span class="number">10</span>);<span class="comment">//列之间的间隔</span></div><div class="line">        gridPane.setVgap(<span class="number">10</span>);<span class="comment">//行之间的间隔</span></div><div class="line">        gridPane.setPadding(<span class="keyword">new</span> Insets(<span class="number">25</span>,<span class="number">25</span>,<span class="number">25</span>,<span class="number">25</span>));<span class="comment">//指定了上、右、下、左四边的间隔</span></div><div class="line"></div><div class="line">        Text sceneTitle = <span class="keyword">new</span> Text(<span class="string">"Welcome!"</span>);<span class="comment">//不可编辑的Text对象</span></div><div class="line">        sceneTitle.setFont(Font.font(<span class="string">"Tahoma"</span>, FontWeight.NORMAL,<span class="number">20</span>));<span class="comment">//设置字体</span></div><div class="line">        gridPane.add(sceneTitle,<span class="number">0</span>,<span class="number">0</span>,<span class="number">2</span>,<span class="number">1</span>);<span class="comment">//添加到GridPane</span></div><div class="line">        Label userName = <span class="keyword">new</span> Label(<span class="string">"用户名："</span>);<span class="comment">//Label</span></div><div class="line">        gridPane.add(userName,<span class="number">0</span>,<span class="number">1</span>);</div><div class="line">        TextField userTextField = <span class="keyword">new</span> TextField();<span class="comment">//文本框</span></div><div class="line">        gridPane.add(userTextField,<span class="number">1</span>,<span class="number">1</span>);</div><div class="line">        Label password = <span class="keyword">new</span> Label(<span class="string">"密码："</span>);</div><div class="line">        gridPane.add(password,<span class="number">0</span>,<span class="number">2</span>);</div><div class="line">        PasswordField passwordField = <span class="keyword">new</span> PasswordField();<span class="comment">//密码框</span></div><div class="line">        gridPane.add(passwordField,<span class="number">1</span>,<span class="number">2</span>);</div><div class="line">        Button btn = <span class="keyword">new</span> Button(<span class="string">"登入"</span>);<span class="comment">//按钮</span></div><div class="line">        HBox hbBtn = <span class="keyword">new</span> HBox(<span class="number">10</span>);<span class="comment">//HBox布局面板，它的spacing被设置为10像素</span></div><div class="line">        hbBtn.setAlignment(Pos.BOTTOM_RIGHT);<span class="comment">//居右下，HBox面板为按钮设置了与grid面板中其它控件不同的对齐方式</span></div><div class="line">        hbBtn.getChildren().add(btn);<span class="comment">//将按钮控件作为子节点</span></div><div class="line">        gridPane.add(hbBtn, <span class="number">1</span>, <span class="number">4</span>);<span class="comment">//将HBox pane放到grid中的第1列，第4行</span></div><div class="line">        <span class="keyword">final</span> Text actionTarget = <span class="keyword">new</span> Text();<span class="comment">//增加用于显示信息的文本</span></div><div class="line">        gridPane.add(actionTarget, <span class="number">1</span>, <span class="number">6</span>);</div><div class="line">        btn.setOnAction(<span class="keyword">new</span> EventHandler&lt;ActionEvent&gt;() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handle</span><span class="params">(ActionEvent event)</span> </span>&#123;</div><div class="line">                actionTarget.setText(<span class="string">"你的密码是："</span>+passwordField.getText());</div><div class="line">                actionTarget.setFill(Color.FIREBRICK);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line"></div><div class="line">        Scene scene = <span class="keyword">new</span> Scene(gridPane,<span class="number">300</span>,<span class="number">350</span>);<span class="comment">//grid pane作为root节点</span></div><div class="line"></div><div class="line">        primaryStage.setScene(scene);</div><div class="line">        primaryStage.show();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        launch(args);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="GRIDPANE-LAYOUT"><a href="#GRIDPANE-LAYOUT" class="headerlink" title="GRIDPANE LAYOUT"></a>GRIDPANE LAYOUT</h3><ul>
+<li><p>GridPane：一个灵活的行列网格来对控件进行布局</p>
+<ul>
+<li><p>setAlignment：将grid的默认位置从靠左上角对齐改为Pos.CENTER(居中)显示</p>
+</li>
+<li><p>setVgap/setHgap：管理行/列之间的间隔</p>
+</li>
+<li><p>setPadding：管理grid面板边缘周围的间隔</p>
+</li>
+<li><p>insets：分别指定了上、右、下、左四边的间隔</p>
+</li>
+<li><p>add：添加子节点控件</p>
+<p>Node child：子节点对象；int columnIndex：列索引；int rowIndex：行索引；int colspan：跨列数(可选)；int rowspan：跨行数(可选)</p>
+</li>
+</ul>
+<p>以上参数我们可以通过下面这张图来理解：</p>
+<p><img src="http://www.javafxchina.net/blog/wp-content/uploads/2015/06/4_2-login_gridlines_co.png" alt="gridPane布局"></p>
+</li>
+</ul>
+<h3 id="添加子节点控件"><a href="#添加子节点控件" class="headerlink" title="添加子节点控件"></a>添加子节点控件</h3><ul>
+<li>Text：不可编辑的文本</li>
+<li>setFont：设置变量的family(字体)、fontWeight(字重粗细)和size(字号)</li>
+<li>Label：Label标签，等同于html的<code>&lt;label&gt;&lt;/label&gt;</code></li>
+<li>TextField：文本域输入框，等同于html的<code>&lt;input type=&quot;text&quot;/&gt;</code></li>
+<li>PasswordField：密码输入框，等同于html的<code>&lt;input type=&quot;password&quot;/&gt;</code></li>
+<li>Button：按钮<code>&lt;input type=&quot;button&quot;/&gt;</code></li>
+<li>HBox：布局面板，为按钮设置了与grid面板中其它控件不同的对齐方式</li>
+</ul>
+<h3 id="添加按钮点击事件"><a href="#添加按钮点击事件" class="headerlink" title="添加按钮点击事件"></a>添加按钮点击事件</h3><ul>
+<li>创建Text对象actionTarget，初始化没有任何文字</li>
+<li>在button的setOnAction方法里对actionTarget进行文本赋值(setText)以及设置字体颜色(setFill)</li>
+</ul>
+<h3 id="最终效果"><a href="#最终效果" class="headerlink" title="最终效果"></a>最终效果</h3><p><img src="http://i1.piimg.com/4851/7c95c5838b82d4f9.png" alt="登录最终效果"></p>
+<p>注：本文部分内容转载自 <a href="http://www.javafxchina.net/blog/2015/06/doc01_form/" target="_blank" rel="external">javafxchina</a></p>
 
       
     </div>
@@ -408,9 +444,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/技术/" rel="tag"># 技术</a>
+            <a href="/tags/JavaFx/" rel="tag"># JavaFx</a>
           
-            <a href="/tags/Oracle/" rel="tag"># Oracle</a>
+            <a href="/tags/桌面应用/" rel="tag"># 桌面应用</a>
           
         </div>
       
@@ -419,8 +455,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/12/27/分裂-周杰伦/" rel="next" title="分裂 - 周杰伦">
-                <i class="fa fa-chevron-left"></i> 分裂 - 周杰伦
+              <a href="/2018/03/10/hexo的一个问题/" rel="next" title="/dev/tty No such device or address">
+                <i class="fa fa-chevron-left"></i> /dev/tty No such device or address
               </a>
             
           </div>
@@ -429,8 +465,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/01/09/未激活状态时触发改变标签页title/" rel="prev" title="未激活状态时触发改变标签页title">
-                未激活状态时触发改变标签页title <i class="fa fa-chevron-right"></i>
+              <a href="/2018/03/31/IDEA2017破解/" rel="prev" title="IDEA2017破解">
+                IDEA2017破解 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -480,8 +516,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/12/29/关于Oracle里的(+)/"
-           data-title="关于Oracle里的(+)" data-url="http://gonethen.github.io/2016/12/29/关于Oracle里的(+)/">
+      <div class="ds-thread" data-thread-key="2018/03/31/学习JavaFX之路(2) - 简单的登录窗口/"
+           data-title="学习JavaFX之路(2) - 简单的登录窗口" data-url="http://gonethen.github.io/2018/03/31/学习JavaFX之路(2) - 简单的登录窗口/">
       </div>
     
   </div>
@@ -505,8 +541,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/jay.jpg"
@@ -604,6 +649,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#登录"><span class="nav-number">1.</span> <span class="nav-text">登录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#示例代码"><span class="nav-number">1.1.</span> <span class="nav-text">示例代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GRIDPANE-LAYOUT"><span class="nav-number">1.2.</span> <span class="nav-text">GRIDPANE LAYOUT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加子节点控件"><span class="nav-number">1.3.</span> <span class="nav-text">添加子节点控件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加按钮点击事件"><span class="nav-number">1.4.</span> <span class="nav-text">添加按钮点击事件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最终效果"><span class="nav-number">1.5.</span> <span class="nav-text">最终效果</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>

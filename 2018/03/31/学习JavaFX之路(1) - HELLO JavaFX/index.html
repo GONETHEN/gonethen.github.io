@@ -80,7 +80,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="技术,Oracle," />
+  <meta name="keywords" content="JavaFx,桌面应用," />
 
 
 
@@ -98,16 +98,16 @@
 
 
 
-<meta name="description" content="+表示补充，即哪个表有加号，这个表就是匹配表。">
+<meta name="description" content="Hello JavaFX.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于Oracle里的(+)">
-<meta property="og:url" content="http://gonethen.github.io/2016/12/29/关于Oracle里的(+)/index.html">
+<meta property="og:title" content="学习JavaFX之路(1) - HELLO JavaFX">
+<meta property="og:url" content="http://gonethen.github.io/2018/03/31/学习JavaFX之路(1) - HELLO JavaFX/index.html">
 <meta property="og:site_name" content="THE">
-<meta property="og:description" content="+表示补充，即哪个表有加号，这个表就是匹配表。">
-<meta property="og:updated_time" content="2016-12-29T04:17:58.782Z">
+<meta property="og:description" content="Hello JavaFX.">
+<meta property="og:updated_time" content="2017-04-20T11:59:35.869Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于Oracle里的(+)">
-<meta name="twitter:description" content="+表示补充，即哪个表有加号，这个表就是匹配表。">
+<meta name="twitter:title" content="学习JavaFX之路(1) - HELLO JavaFX">
+<meta name="twitter:description" content="Hello JavaFX.">
 
 
 
@@ -135,13 +135,13 @@
 
 
 
-  <link rel="canonical" href="http://gonethen.github.io/2016/12/29/关于Oracle里的(+)/"/>
+  <link rel="canonical" href="http://gonethen.github.io/2018/03/31/学习JavaFX之路(1) - HELLO JavaFX/"/>
 
 
 
 
 
-  <title> 关于Oracle里的(+) | THE </title>
+  <title> 学习JavaFX之路(1) - HELLO JavaFX | THE </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -262,7 +262,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://gonethen.github.io/2016/12/29/关于Oracle里的(+)/">
+  <link itemprop="mainEntityOfPage" href="http://gonethen.github.io/2018/03/31/学习JavaFX之路(1) - HELLO JavaFX/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="GONETHEN">
@@ -286,7 +286,7 @@
             
             
               
-                关于Oracle里的(+)
+                学习JavaFX之路(1) - HELLO JavaFX
               
             
           </h1>
@@ -299,8 +299,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-29T09:57:45+08:00">
-                2016-12-29
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-31T14:23:54+08:00">
+                2018-03-31
               </time>
             
 
@@ -333,8 +333,8 @@
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/12/29/关于Oracle里的(+)/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/29/关于Oracle里的(+)/" itemprop="commentCount"></span>
+                <a href="/2018/03/31/学习JavaFX之路(1) - HELLO JavaFX/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/03/31/学习JavaFX之路(1) - HELLO JavaFX/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -365,10 +365,53 @@
       
 
       
-        <p>+表示补充，即哪个表有加号，这个表就是匹配表。</p>
+        <p><strong>Hello JavaFX.</strong></p>
 <a id="more"></a>
-<p>加号写在右表，左表就是全部显示，故是左连接。</p>
-<p>注意： 用（+） 就要用关键字where</p>
+<h2 id="HELLO-JavaFX"><a href="#HELLO-JavaFX" class="headerlink" title="HELLO JavaFX"></a>HELLO JavaFX</h2><h3 id="什么是JavaFX"><a href="#什么是JavaFX" class="headerlink" title="什么是JavaFX"></a>什么是JavaFX</h3><p>JavaFX是一个强大的图形和多媒体处理工具包集合，它允许开发者来设计、创建、测试、调试和部署富客户端程序，早已加入Java8豪华午餐。</p>
+<p>谁说Java不能开发桌面应用程序？</p>
+<h3 id="JavaFX基本结构"><a href="#JavaFX基本结构" class="headerlink" title="JavaFX基本结构"></a>JavaFX基本结构</h3><ul>
+<li>JavaFX运行主类继承自<code>javafx.application.Application</code>类，start()方法是所有JavaFX应用程序的入口。</li>
+<li>JavaFX应用程序将UI容器定义为舞台(Stage)与场景(Scene)。Stage类是JavaFX顶级容器。Scene类是所有内容的容器。</li>
+</ul>
+<h3 id="Hello-JavaFX"><a href="#Hello-JavaFX" class="headerlink" title="Hello JavaFX"></a>Hello JavaFX</h3><p>直接上代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> <span class="keyword">extends</span> <span class="title">Application</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">start</span><span class="params">(Stage primaryStage)</span> <span class="keyword">throws</span> Exception</span>&#123;</div><div class="line">        Button btn = <span class="keyword">new</span> Button();</div><div class="line">        btn.setText(<span class="string">"说你好"</span>);</div><div class="line">        btn.setOnAction(<span class="keyword">new</span> EventHandler&lt;ActionEvent&gt;() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handle</span><span class="params">(ActionEvent event)</span> </span>&#123;</div><div class="line">                System.out.println(<span class="string">"你好"</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        StackPane root = <span class="keyword">new</span> StackPane();</div><div class="line">        root.getChildren().add(btn);</div><div class="line">        Scene scene = <span class="keyword">new</span> Scene(root,<span class="number">300</span>,<span class="number">250</span>);</div><div class="line">        primaryStage.setScene(scene);</div><div class="line">        primaryStage.setTitle(<span class="string">"你好"</span>);</div><div class="line">        primaryStage.show();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        launch(args);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>在JavaFX中，Scene中的内容会以由图形节点(Node)构成的分层场景图(Scene Graph)来展现。在本例中，root节点是一个StackPane对象，它是一个可以调整大小的layout节点。这就意味着在用户改变stage大小时，root节点可以随scene的大小变化而变化。</li>
+<li>root节点包含一个带文本的按钮子节点，按钮上添加了一个事件处理器(Event Handler)，它在点击按钮时会向控制台输出信息。</li>
+<li>当JavaFX应用程序是通过JavaFX Packager工具打包时，main()方法就不是必需的的了，因为JavaFX Package工具会将JavaFX Launcher嵌入到JAR文件中。但是保留main()方法还是很有用的，这样你可以运行不带有JavaFX Launcher的JAR文件，例如在使用某些没有将JavaFX工具完全集成进去的IDE时。另外嵌入了JavaFX代码的Swing应用程序仍需要main()方法。</li>
+</ul>
+<h3 id="JavaFX打包成exe"><a href="#JavaFX打包成exe" class="headerlink" title="JavaFX打包成exe"></a>JavaFX打包成exe</h3><p><strong>1. 生成jar的命令：javapackager -createjar</strong></p>
+<blockquote>
+<p>javapackager -createjar -appclass Test -srcdir classes -outdir archive -outfile Test.jar</p>
+</blockquote>
+<p>参数说明：</p>
+<ul>
+<li>-appclass Test<br>指定应用程序主类Test</li>
+<li>-srcdir classes<br>指定源目录classes</li>
+<li>-outdir archive<br>指定输出目录archive</li>
+<li>-outfile Test.jar<br>指定输出文件名Test.jar</li>
+</ul>
+<p><strong>2. 生成exe的命令：javapackager -deploy</strong></p>
+<blockquote>
+<p>javapackager -deploy -appclass Test -native image -srcdir archive -outdir deploy -outfile Test -Bruntime=$JAVA_HOME/jre</p>
+</blockquote>
+<p>参数说明：</p>
+<ul>
+<li><p>-appclass Test</p>
+<p>指定应用程序主类Test</p>
+</li>
+<li><p>-native image<br>指定输出的本地程序类型，image代表只生成一个启动器(exe)，也有别的选项可以生成安装程序等等(需要第三方工具)</p>
+</li>
+<li><p>-srcdir archive<br>指定源目录，这里指刚才打包存放jar文件的目录</p>
+</li>
+<li><p>-outdir deploy<br>指定输出目录deploy</p>
+</li>
+<li><p>-outfile Test<br>指定输出文件名Test</p>
+</li>
+<li><p>-Bruntime=$JAVA_HOME/jre<br>指定打包出来的独立程序使用的jre的位置，如果用的是cmd的话写成%JAVA_HOME%\jre<br>也可以指定别的jre，但是要小心保证javapackager所在的jdk和所使用的jre的位数相同(即都是32位或都是64位，最好版本也相同，最最好就直接用jdk自带的jre)</p>
+</li>
+</ul>
+<p>注：本文部分内容转载自 <a href="http://www.javafxchina.net/blog/2015/06/doc01_helloworldstype/" target="_blank" rel="external">javafxchina</a></p>
 
       
     </div>
@@ -408,9 +451,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/技术/" rel="tag"># 技术</a>
+            <a href="/tags/JavaFx/" rel="tag"># JavaFx</a>
           
-            <a href="/tags/Oracle/" rel="tag"># Oracle</a>
+            <a href="/tags/桌面应用/" rel="tag"># 桌面应用</a>
           
         </div>
       
@@ -419,8 +462,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/12/27/分裂-周杰伦/" rel="next" title="分裂 - 周杰伦">
-                <i class="fa fa-chevron-left"></i> 分裂 - 周杰伦
+              <a href="/2018/03/31/本地重新关联githubPage/" rel="next" title="本地重新关联githubPage">
+                <i class="fa fa-chevron-left"></i> 本地重新关联githubPage
               </a>
             
           </div>
@@ -428,10 +471,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/01/09/未激活状态时触发改变标签页title/" rel="prev" title="未激活状态时触发改变标签页title">
-                未激活状态时触发改变标签页title <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -480,8 +519,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/12/29/关于Oracle里的(+)/"
-           data-title="关于Oracle里的(+)" data-url="http://gonethen.github.io/2016/12/29/关于Oracle里的(+)/">
+      <div class="ds-thread" data-thread-key="2018/03/31/学习JavaFX之路(1) - HELLO JavaFX/"
+           data-title="学习JavaFX之路(1) - HELLO JavaFX" data-url="http://gonethen.github.io/2018/03/31/学习JavaFX之路(1) - HELLO JavaFX/">
       </div>
     
   </div>
@@ -505,8 +544,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/jay.jpg"
@@ -604,6 +652,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#HELLO-JavaFX"><span class="nav-number">1.</span> <span class="nav-text">HELLO JavaFX</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是JavaFX"><span class="nav-number">1.1.</span> <span class="nav-text">什么是JavaFX</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaFX基本结构"><span class="nav-number">1.2.</span> <span class="nav-text">JavaFX基本结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hello-JavaFX"><span class="nav-number">1.3.</span> <span class="nav-text">Hello JavaFX</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaFX打包成exe"><span class="nav-number">1.4.</span> <span class="nav-text">JavaFX打包成exe</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>
