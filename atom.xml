@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://gonethen.github.io/"/>
-  <updated>2017-04-20T11:59:35.869Z</updated>
+  <updated>2018-04-12T12:50:09.006Z</updated>
   <id>http://gonethen.github.io/</id>
   
   <author>
@@ -14,6 +14,64 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Mysql查询技巧</title>
+    <link href="http://gonethen.github.io/2018/04/08/Mysql%E6%9F%A5%E8%AF%A2%E6%8A%80%E5%B7%A7/"/>
+    <id>http://gonethen.github.io/2018/04/08/Mysql查询技巧/</id>
+    <published>2018-04-08T02:05:11.000Z</published>
+    <updated>2018-04-12T12:50:09.006Z</updated>
+    
+    <content type="html"><![CDATA[<p>学无止境。</p>
+<a id="more"></a>
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>​    前段时间公司要月度报表数据，由于没有专业的数据分析人员，这份工作自然而然的就落到了我的身上。之前多少也接触过Mysql，left join更是自认为用得很溜，结果这么一个sql还是写了一天，结果倒是出来了，具体对不对就让时间来考验吧。</p>
+<h3 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h3><blockquote>
+<ol>
+<li>这是一个月度报表</li>
+<li>用到的表可分为三大类：用户表account/代理表manager/其他业务相关表order等</li>
+<li>查询结果应为：以每个总代理为一条记录，查询所属于他的所有子代理的月度流水和所属于他或他的子代理的所有用户的月度流水</li>
+</ol>
+</blockquote>
+<h3 id="第一版"><a href="#第一版" class="headerlink" title="第一版"></a>第一版</h3><p>​    由于二月份代理的业务数据一只手就数的过来，所以二月份做的第一版只涉及到用户月度流水查询，代理的数据直接计算器算出来的。</p>
+<p>####sql语句</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">SELECT</div><div class="line">	m.id,</div><div class="line">	m.truename,</div><div class="line">	COUNT(DISTINCT a.id),</div><div class="line">	SUM(IFNULL(c.number,0)),</div><div class="line">	SUM(IFNULL(t.techargeMoney,0)),</div><div class="line">	SUM(IFNULL(po.roomcard,0)),</div><div class="line">	SUM(IFNULL(po.roomcard,0))+SUM(IFNULL(t.techargeMoney,0)),</div><div class="line">	SUM(IFNULL(po.money,0)),</div><div class="line">	SUM(IFNULL(po.money,0))*0.994</div><div class="line">FROM</div><div class="line">	manager m</div><div class="line">LEFT JOIN manager m1 </div><div class="line">	ON m1.status = &apos;0&apos; AND m1.subCode = m.subCode</div><div class="line">LEFT JOIN (SELECT * FROM account WHERE status = &apos;0&apos;) a</div><div class="line">	ON a.manager_up_id = m1.id</div><div class="line">LEFT JOIN (SELECT uuid,SUM(IFNULL(number,0)) number FROM carddeductlog WHERE createtime &gt;= STR_TO_DATE(&apos;2018-02-01 00:00:00&apos;,&quot;%Y-%m-%d %T&quot;) AND createtime &lt; STR_TO_DATE(&apos;2018-03-01 00:00:00&apos;,&quot;%Y-%m-%d %T&quot;) GROUP BY uuid) c</div><div class="line">	ON a.Uuid = c.uuid</div><div class="line">LEFT JOIN (SELECT account_id,SUM(IFNULL(techargeMoney,0)) techargeMoney FROM techargerecord WHERE status = &apos;0&apos; AND (mark = &apos;充值&apos; OR mark = &apos;退卡&apos;) AND createtime &gt;= STR_TO_DATE(&apos;2018-02-01 00:00:00&apos;,&quot;%Y-%m-%d %T&quot;) AND createtime &lt; STR_TO_DATE(&apos;2018-03-01 00:00:00&apos;,&quot;%Y-%m-%d %T&quot;) GROUP BY account_id) t</div><div class="line">	ON t.account_id = a.id</div><div class="line">LEFT JOIN (SELECT accountid,SUM(IFNULL(roomcard,0)) roomcard,SUM(IFNULL(money,0)) money FROM playerorder WHERE status = &apos;0&apos; AND createtime &gt;= STR_TO_DATE(&apos;2018-02-01 00:00:00&apos;,&quot;%Y-%m-%d %T&quot;) AND createtime &lt; STR_TO_DATE(&apos;2018-03-01 00:00:00&apos;,&quot;%Y-%m-%d %T&quot;) GROUP BY accountid) po</div><div class="line">	ON po.accountid = a.id</div><div class="line">WHERE m.status = &apos;0&apos;</div><div class="line">AND m.manager_up_id =1</div><div class="line">GROUP BY m.id</div><div class="line">ORDER BY m.createtime;</div></pre></td></tr></table></figure>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>​    这一版其实我也学到了不少东西，比如：</p>
+<ul>
+<li>如果字段值为空则返回指定值<code>IFNULL(c.number,0)</code>/字符串转时间格式<code>STR_TO_DATE(&#39;2018-03-01 00:00:00&#39;,&quot;%Y-%m-%d %T&quot;)</code></li>
+<li>manager和account是一对多，account和carddeductlog/techargeMoney/playerorder也是一对多，这条语句的思路就是：<ul>
+<li>根据subCode字段左连接查出每个总代理下的所有子代理，再根据manager_up_id左连接查出每个用户的每个代理</li>
+<li>查出每个业务表当月的数据，再以外键accountid做分组统计得到每个account当月的数据</li>
+<li>用第一步的数据左连接第二部的数据，最后求和并GROUP BY m.id得到最终结果</li>
+</ul>
+</li>
+</ul>
+<h3 id="第二版"><a href="#第二版" class="headerlink" title="第二版"></a>第二版</h3><p>​    三月份代理数据变多了，于是我又写了一条sql，再加上第一版，同样能得到最终数据。</p>
+<h4 id="sql"><a href="#sql" class="headerlink" title="sql"></a>sql</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">SELECT</div><div class="line">	m.id,</div><div class="line">	m.truename,</div><div class="line">	COUNT(DISTINCT m2.id),</div><div class="line">	SUM(IFNULL(o.roomcard,0)),</div><div class="line">	SUM(IFNULL(o.money,0)),</div><div class="line">	SUM(IFNULL(o.money,0))*0.994</div><div class="line">FROM</div><div class="line">	manager m</div><div class="line">LEFT JOIN (SELECT * FROM manager WHERE status = &apos;0&apos;) m2</div><div class="line">	ON m2.subCode = m.subCode</div><div class="line">LEFT JOIN (SELECT managerid,SUM(IFNULL(roomcard,0)) roomcard,SUM(IFNULL(money,0)) money FROM `order` WHERE status = &apos;0&apos; AND createtime &gt;= STR_TO_DATE(&apos;2018-02-01 00:00:00&apos;,&quot;%Y-%m-%d %T&quot;) AND createtime &lt; STR_TO_DATE(&apos;2018-03-01 00:00:00&apos;,&quot;%Y-%m-%d %T&quot;) GROUP BY managerid) o</div><div class="line">	ON o.managerid = m2.id</div><div class="line">WHERE m.status = &apos;0&apos;</div><div class="line">AND m.manager_up_id =1</div><div class="line">GROUP BY m.id</div><div class="line">ORDER BY m.createtime;</div></pre></td></tr></table></figure>
+<p>​    这一版需要执行两条sql，不符合我想一次查询得到结果的预期，于是便有了第三版的诞生。</p>
+<h3 id="第三版"><a href="#第三版" class="headerlink" title="第三版"></a>第三版</h3><p>​    本以为，多加几个left join就可以得到结果，没曾想加完之后得到的用户数据和代理数据分别是正确数据的7倍和14倍，经历了一整天的认真钻研，退而求其次，终于让我把正确数据给凑出来了。</p>
+<h4 id="sql-1"><a href="#sql-1" class="headerlink" title="sql"></a>sql</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line">SELECT</div><div class="line">m.id,</div><div class="line">m.truename,</div><div class="line">mr.m_count,</div><div class="line">mr.m_card_sum,</div><div class="line">mr.m_money_sum,</div><div class="line">mr.m_real_money_sum,</div><div class="line">ar.a_count,</div><div class="line">ar.a_used_card_sum,</div><div class="line">ar.a_charge_card_sum,</div><div class="line">ar.a_buy_card_sum,</div><div class="line">ar.a_total_card_sum,</div><div class="line">ar.a_money_sum,</div><div class="line">ar.a_real_money_sum</div><div class="line">FROM manager m</div><div class="line">LEFT JOIN</div><div class="line">(SELECT</div><div class="line">	m1.id,</div><div class="line">	COUNT(DISTINCT m2.id) m_count,</div><div class="line">	SUM(IFNULL(o.roomcard,0)) m_card_sum,</div><div class="line">	SUM(IFNULL(o.money,0)) m_money_sum,</div><div class="line">	SUM(IFNULL(o.money,0))*0.994 m_real_money_sum</div><div class="line">FROM</div><div class="line">	manager m1</div><div class="line">LEFT JOIN (SELECT * FROM manager WHERE status = &apos;0&apos;) m2</div><div class="line">	ON m2.subCode = m1.subCode</div><div class="line">LEFT JOIN (SELECT managerid,SUM(IFNULL(roomcard,0)) roomcard,SUM(IFNULL(money,0)) money FROM `order` WHERE status = &apos;0&apos; AND createtime &gt;= STR_TO_DATE(&apos;2018-02-01 00:00:00&apos;,&quot;%Y-%m-%d %T&quot;) AND createtime &lt; STR_TO_DATE(&apos;2018-03-01 00:00:00&apos;,&quot;%Y-%m-%d %T&quot;) GROUP BY managerid) o</div><div class="line">	ON o.managerid = m2.id</div><div class="line">WHERE m1.status = &apos;0&apos;</div><div class="line">AND m1.manager_up_id =1</div><div class="line">GROUP BY m1.id) mr</div><div class="line">ON m.id = mr.id</div><div class="line">LEFT JOIN</div><div class="line">(SELECT</div><div class="line">	m3.id mid,</div><div class="line">	COUNT(DISTINCT a.id) a_count,</div><div class="line">	SUM(IFNULL(c.number,0)) a_used_card_sum,</div><div class="line">	SUM(IFNULL(t.techargeMoney,0)) a_charge_card_sum,</div><div class="line">	SUM(IFNULL(po.roomcard,0)) a_buy_card_sum,</div><div class="line">	SUM(IFNULL(po.roomcard,0))+SUM(IFNULL(t.techargeMoney,0)) a_total_card_sum,</div><div class="line">	SUM(IFNULL(po.money,0)) a_money_sum,</div><div class="line">	SUM(IFNULL(po.money,0))*0.994 a_real_money_sum</div><div class="line">FROM</div><div class="line">	manager m3</div><div class="line">LEFT JOIN (SELECT * FROM manager WHERE status = &apos;0&apos;) m4</div><div class="line">	ON m3.subCode = m4.subCode</div><div class="line">LEFT JOIN (SELECT * FROM account WHERE status = &apos;0&apos;) a</div><div class="line">	ON a.manager_up_id = m4.id</div><div class="line">LEFT JOIN (SELECT uuid,SUM(IFNULL(number,0)) number FROM carddeductlog WHERE createtime &gt;= STR_TO_DATE(&apos;2018-02-01 00:00:00&apos;,&quot;%Y-%m-%d %T&quot;) AND createtime &lt; STR_TO_DATE(&apos;2018-03-01 00:00:00&apos;,&quot;%Y-%m-%d %T&quot;) GROUP BY uuid) c</div><div class="line">	ON a.Uuid = c.uuid</div><div class="line">LEFT JOIN (SELECT account_id,SUM(IFNULL(techargeMoney,0)) techargeMoney FROM techargerecord WHERE status = &apos;0&apos; AND (mark = &apos;充值&apos; OR mark = &apos;退卡&apos;) AND createtime &gt;= STR_TO_DATE(&apos;2018-02-01 00:00:00&apos;,&quot;%Y-%m-%d %T&quot;) AND createtime &lt; STR_TO_DATE(&apos;2018-03-01 00:00:00&apos;,&quot;%Y-%m-%d %T&quot;) GROUP BY account_id) t</div><div class="line">	ON t.account_id = a.id</div><div class="line">LEFT JOIN (SELECT accountid,SUM(IFNULL(roomcard,0)) roomcard,SUM(IFNULL(money,0)) money FROM playerorder WHERE status = &apos;0&apos; AND createtime &gt;= STR_TO_DATE(&apos;2018-02-01 00:00:00&apos;,&quot;%Y-%m-%d %T&quot;) AND createtime &lt; STR_TO_DATE(&apos;2018-03-01 00:00:00&apos;,&quot;%Y-%m-%d %T&quot;) GROUP BY accountid) po</div><div class="line">	ON po.accountid = a.id</div><div class="line">WHERE m3.status = &apos;0&apos;</div><div class="line">AND m3.manager_up_id =1</div><div class="line">GROUP BY m3.id) ar</div><div class="line">ON m.id = ar.mid</div><div class="line">WHERE m.status = &apos;0&apos;</div><div class="line">AND m.manager_up_id =1</div><div class="line">GROUP BY m.id;</div></pre></td></tr></table></figure>
+<p>​    其实，上面的句子不是真正的第三版，因为我在写这篇博客的时候突然来了思路，对第三版的语句又进行了一番小的修改。不难看出，第三版的核心思想就是，对子查询进行整合。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>坚持就是胜利</li>
+<li>写博客可以理顺思路，甚至可能有意想不到的收获</li>
+<li>学无止境，继续努力</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;学无止境。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="技术" scheme="http://gonethen.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Mysql" scheme="http://gonethen.github.io/tags/Mysql/"/>
+    
+      <category term="left join" scheme="http://gonethen.github.io/tags/left-join/"/>
+    
+  </entry>
   
   <entry>
     <title>学习JavaFX之路(1) - HELLO JavaFX</title>
