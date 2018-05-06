@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://gonethen.github.io/"/>
-  <updated>2018-04-12T12:50:09.006Z</updated>
+  <updated>2018-05-06T12:49:55.680Z</updated>
   <id>http://gonethen.github.io/</id>
   
   <author>
@@ -14,6 +14,129 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>CentOS7安装jdk</title>
+    <link href="http://gonethen.github.io/2018/04/20/CentOS7%E5%AE%89%E8%A3%85jdk/"/>
+    <id>http://gonethen.github.io/2018/04/20/CentOS7安装jdk/</id>
+    <published>2018-04-20T05:05:11.000Z</published>
+    <updated>2018-05-06T12:49:55.680Z</updated>
+    
+    <content type="html"><![CDATA[<p>装过好几次了，每次都上网查，下次直接看自己的博客。用rpm格式。</p>
+<a id="more"></a>
+<p>####安装步骤</p>
+<ol>
+<li>下载对应的jdk-8u151-linux-x64.rpm文件到/usr/local</li>
+</ol>
+<ol>
+<li><p>执行<code>rpm -ivh ./jdk-8u151-linux-x64.rpm</code>开始进行安装，默认安装到了/usr/java目录下</p>
+</li>
+<li><p>配置环境变量，执行<code>vi /etc/profile</code>，在文末添加：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">export JAVA_HOME=/usr/java/jdk1.8.0_151</div><div class="line">export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar</div><div class="line">export PATH=$JAVA_HOME/bin:$PATH</div></pre></td></tr></table></figure>
+</li>
+<li><p>执行<code>source /etc/profile</code>使配置生效</p>
+</li>
+<li><p>执行<code>java -version</code>检查是否安装成功</p>
+</li>
+</ol>
+<p>####总结</p>
+<ul>
+<li>其实很简单</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;装过好几次了，每次都上网查，下次直接看自己的博客。用rpm格式。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="技术" scheme="http://gonethen.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Java" scheme="http://gonethen.github.io/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CentOS7安装python3</title>
+    <link href="http://gonethen.github.io/2018/04/20/CentOS7%E5%AE%89%E8%A3%85python3/"/>
+    <id>http://gonethen.github.io/2018/04/20/CentOS7安装python3/</id>
+    <published>2018-04-20T04:05:11.000Z</published>
+    <updated>2018-05-06T12:50:04.344Z</updated>
+    
+    <content type="html"><![CDATA[<p>What day is today?</p>
+<a id="more"></a>
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>​    如今仿佛全世界都在搞人工智能，我也简单的从入门到放弃一下吧，嘻嘻😁</p>
+<h3 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h3><blockquote>
+<ol>
+<li>为了实现服务器自动化部署</li>
+<li>在人工智能的浪潮中沾湿衣角</li>
+<li>学无止境</li>
+</ol>
+</blockquote>
+<h3 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h3><h4 id="1-安装之前的准备工作"><a href="#1-安装之前的准备工作" class="headerlink" title="1. 安装之前的准备工作"></a>1. 安装之前的准备工作</h4><ul>
+<li><p>CentOS7默认安装了python2.7.5，因为一些命令比如<code>yum</code>要用到它</p>
+</li>
+<li><p>执行<code>python -V</code>查看是否安装Python</p>
+</li>
+<li><p>执行<code>which python</code>查看Python可执行文件的位置，如图可知文件在/usr/bin/目录下</p>
+<p><img src="https://images2017.cnblogs.com/blog/1230145/201712/1230145-20171219094237943-1684291697.png" alt=""></p>
+</li>
+<li><p>切换到/usr/bin/目录下，执行<code>ll python*</code>查看可知，python指向的是python2.7</p>
+<p><img src="https://images2017.cnblogs.com/blog/1230145/201712/1230145-20171219094256475-484864661.png" alt=""></p>
+</li>
+<li><p>执行<code>yum install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gcc make</code>，用于下载编译python3</p>
+</li>
+<li><p>执行<code>mv python python.bak</code>以备份python</p>
+</li>
+</ul>
+<p>####2. 安装Python3</p>
+<ul>
+<li><p>执行<code>wget https://www.python.org/ftp/python/3.6.2/Python-3.6.2.tar.xz</code>下载Python3，此时仍在/usr/bin目录下</p>
+</li>
+<li><p>执行<code>tar -xvJf Python-3.6.2.tar.xz</code>解压Python-3.6.2.tar.xz</p>
+</li>
+<li><p>为保险起见，先切换到/usr/local/目录下<code>cd /usr/local/</code>新建python3文件夹<code>mkdir python3</code></p>
+</li>
+<li><p>切换回刚刚的解压目录/usr/bin/Python-3.6.2</p>
+</li>
+<li><p>执行<code>./configure prefix=/usr/local/python3</code>和<code>make &amp;&amp; make install</code>进行编译安装</p>
+</li>
+<li><p>执行<code>ln -s /usr/local/python3/bin/python3 /usr/bin/python</code>以创建软链接</p>
+<p><img src="https://images2017.cnblogs.com/blog/1230145/201712/1230145-20171219094315662-2091385524.png" alt=""></p>
+</li>
+</ul>
+<h4 id="3-后续操作"><a href="#3-后续操作" class="headerlink" title="3. 后续操作"></a>3. 后续操作</h4><ul>
+<li><p>yum依赖于Python2，因此需要修改yum配置。执行<code>vi /usr/bin/yum</code></p>
+</li>
+<li><p>把#! /usr/bin/python修改为#! /usr/bin/python2</p>
+<p><img src="https://images2017.cnblogs.com/blog/1230145/201712/1230145-20171219094321896-540310296.png" alt=""></p>
+</li>
+<li><p>同理<code>vi /usr/libexec/urlgrabber-ext-down</code>文件里面的#! /usr/bin/python 也要修改为#! /usr/bin/python2</p>
+</li>
+<li><p>分别执行<code>python -V</code>和<code>python2 -V</code>检查安装是否成功</p>
+</li>
+<li><p>Python3安装完成后，默认已经安装了pip，配置软链接即可使用pip工具<code>ln -s /usr/local/python3/bin/pip3  /usr/bin/pip</code></p>
+</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>参考自：<a href="https://www.cnblogs.com/blogjun/articles/8063989.html" target="_blank" rel="external">linux-Centos7安装python3并与python2共存</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;What day is today?&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="技术" scheme="http://gonethen.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Python" scheme="http://gonethen.github.io/tags/Python/"/>
+    
+  </entry>
   
   <entry>
     <title>Mysql查询技巧</title>
