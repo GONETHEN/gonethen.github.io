@@ -151,12 +151,11 @@
     <link href="http://gonethen.github.io/2018/04/24/ajaxFileUpload%E5%92%8CSpringMVC%E5%AE%9E%E7%8E%B0%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/"/>
     <id>http://gonethen.github.io/2018/04/24/ajaxFileUpload和SpringMVC实现文件上传/</id>
     <published>2018-04-24T02:05:11.000Z</published>
-    <updated>2018-05-08T07:22:04.000Z</updated>
+    <updated>2018-05-09T14:11:46.929Z</updated>
     
     <content type="html"><![CDATA[<p>写Blog是个好习惯，今后再用到相关技术可以直接参考。</p>
 <a id="more"></a>
-<p>####准备工作####</p>
-<ol>
+<h4 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h4><ol>
 <li>下载ajaxfileupload.js，最好使用jquery2.x，因为我用3.x的时候出现了一些问题</li>
 </ol>
 <ol>
