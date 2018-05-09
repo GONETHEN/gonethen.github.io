@@ -1,0 +1,828 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Monda:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Java," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="THE" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="写Blog是个好习惯，今后再用到相关技术可以直接参考。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ajaxFileUpload和SpringMVC实现文件上传">
+<meta property="og:url" content="http://gonethen.github.io/2018/04/24/ajaxFileUpload和SpringMVC实现文件上传/index.html">
+<meta property="og:site_name" content="THE">
+<meta property="og:description" content="写Blog是个好习惯，今后再用到相关技术可以直接参考。">
+<meta property="og:updated_time" content="2018-05-08T07:22:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ajaxFileUpload和SpringMVC实现文件上传">
+<meta name="twitter:description" content="写Blog是个好习惯，今后再用到相关技术可以直接参考。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '主任'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://gonethen.github.io/2018/04/24/ajaxFileUpload和SpringMVC实现文件上传/"/>
+
+
+
+
+
+  <title> ajaxFileUpload和SpringMVC实现文件上传 | THE </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">THE</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">GONETHEN</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://gonethen.github.io/2018/04/24/ajaxFileUpload和SpringMVC实现文件上传/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="GONETHEN">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/jay.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="THE">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="THE" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                ajaxFileUpload和SpringMVC实现文件上传
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-24T10:05:11+08:00">
+                2018-04-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2018/04/24/ajaxFileUpload和SpringMVC实现文件上传/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/04/24/ajaxFileUpload和SpringMVC实现文件上传/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 阅读量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>写Blog是个好习惯，今后再用到相关技术可以直接参考。</p>
+<a id="more"></a>
+<p>####准备工作####</p>
+<ol>
+<li>下载ajaxfileupload.js，最好使用jquery2.x，因为我用3.x的时候出现了一些问题</li>
+</ol>
+<ol>
+<li><p>配置spring-mvc.xml文件上传大小限制</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"multipartResolver"</span> <span class="attr">class</span>=<span class="string">"org.springframework.web.multipart.commons.CommonsMultipartResolver"</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"defaultEncoding"</span> <span class="attr">value</span>=<span class="string">"UTF-8"</span> /&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"maxInMemorySize"</span> <span class="attr">value</span>=<span class="string">"40960"</span> /&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"maxUploadSize"</span> <span class="attr">value</span>=<span class="string">"10485760000"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="前端jsp-js"><a href="#前端jsp-js" class="headerlink" title="前端jsp+js"></a>前端jsp+js</h4><p>所有方法都定义在一个giftJs的对象里</p>
+<ul>
+<li><p>jsp</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">id</span>=<span class="string">"previewImg"</span> <span class="attr">class</span>=<span class="string">"am-radius"</span>/&gt;</span></div><div class="line">                            <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">class</span>=<span class="string">"am-btn am-btn-danger am-btn-sm"</span>&gt;</span></div><div class="line">                                <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"am-icon-cloud-upload"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span> 选择要上传的文件<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">                            <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"uploadFile"</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">name</span>=<span class="string">"uploadFile"</span> <span class="attr">onchange</span>=<span class="string">"giftJs.chooseFile(this)"</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>首先是一个图片预览的功能</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">getObjectURL : <span class="function"><span class="keyword">function</span>(<span class="params">file</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> url = <span class="literal">null</span> ;</div><div class="line">    <span class="keyword">if</span> (<span class="built_in">window</span>.createObjectURL!=<span class="literal">undefined</span>) &#123; <span class="comment">// basic</span></div><div class="line">        url = <span class="built_in">window</span>.createObjectURL(file) ;</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">window</span>.URL!=<span class="literal">undefined</span>) &#123; <span class="comment">// mozilla(firefox)</span></div><div class="line">        url = <span class="built_in">window</span>.URL.createObjectURL(file) ;</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">window</span>.webkitURL!=<span class="literal">undefined</span>) &#123; <span class="comment">// webkit or chrome</span></div><div class="line">        url = <span class="built_in">window</span>.webkitURL.createObjectURL(file) ;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> url ;</div><div class="line">&#125;,</div><div class="line"><span class="attr">image_check</span> : <span class="function"><span class="keyword">function</span>(<span class="params">img</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> ($app.isNotNull(img)) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="regexp">/.(jpg|jpeg|png|gif|bmp|JPG|JPEG|PNG|GIF|BMP)$/</span>.test(img)?<span class="literal">true</span>:(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            $app.am_alert(<span class="string">'图片格式仅支持jpg、jpeg、png、gif、bmp格式'</span>);</div><div class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">        &#125;)();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">&#125;,</div><div class="line"><span class="attr">chooseFile</span> : <span class="function"><span class="keyword">function</span>(<span class="params">fileObj</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (giftJs.image_check($(<span class="string">'#uploadFile'</span>).val())) &#123;</div><div class="line">        <span class="keyword">var</span> objUrl = giftJs.getObjectURL(fileObj.files[<span class="number">0</span>]); <span class="comment">//获取图片的路径，该路径不是图片在本地的路径</span></div><div class="line">        <span class="keyword">if</span> (objUrl) &#123;</div><div class="line">            $(<span class="string">"#previewImg"</span>).prop(<span class="string">"src"</span>, objUrl); <span class="comment">//将图片路径存入src中，显示出图片</span></div><div class="line">            $(<span class="string">"#previewImg"</span>).prop(<span class="string">"width"</span>, <span class="string">"140"</span>);</div><div class="line">            $(<span class="string">"#previewImg"</span>).prop(<span class="string">"height"</span>, <span class="string">"140"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;,</div></pre></td></tr></table></figure>
+</li>
+<li><p>然后是图片上传</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div></pre></td><td class="code"><pre><div class="line">openGiftPrompt : <span class="function"><span class="keyword">function</span>(<span class="params">id</span>) </span>&#123;</div><div class="line">    giftJs.resetGiftPrompt();</div><div class="line">    <span class="keyword">if</span> (id &gt; <span class="number">0</span>) &#123;</div><div class="line">        $.ajax(&#123;</div><div class="line">            <span class="attr">type</span>: <span class="string">"GET"</span>,</div><div class="line">            <span class="attr">async</span>: <span class="literal">false</span>,</div><div class="line">            <span class="attr">url</span>: $(<span class="string">"#basePath"</span>).val()+<span class="string">"gift/getGift"</span>,</div><div class="line">            <span class="attr">data</span>: <span class="string">"id="</span>+id,</div><div class="line">            <span class="attr">dataType</span> : <span class="string">'json'</span>,</div><div class="line">            <span class="attr">success</span>: <span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;</div><div class="line">                <span class="keyword">if</span> (result.status == <span class="number">0</span>) &#123;</div><div class="line">                    $(<span class="string">"#previewImg"</span>).prop(<span class="string">"src"</span>, <span class="string">"../"</span>+result.gift.imageUrl);</div><div class="line">                    $(<span class="string">"#previewImg"</span>).prop(<span class="string">"width"</span>, <span class="string">"140"</span>);</div><div class="line">                    $(<span class="string">"#previewImg"</span>).prop(<span class="string">"height"</span>, <span class="string">"140"</span>);</div><div class="line">                    $(<span class="string">"#indexId"</span>).val(result.gift.indexId);</div><div class="line">                    $(<span class="string">"#prizeName"</span>).val(result.gift.prizeName);</div><div class="line">                    $(<span class="string">"#probability"</span>).val(result.gift.probability);</div><div class="line">                    $(<span class="string">"#prizecount"</span>).val(result.gift.prizecount);</div><div class="line">                    $(<span class="string">"#type"</span>).val(result.gift.type);</div><div class="line">                    $(<span class="string">"#imageUrl"</span>).val(result.gift.imageUrl);</div><div class="line">                    $(<span class="string">"#id"</span>).val(result.gift.id);</div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    $app.am_alert(result.error);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line">    $(<span class="string">'#giftPrompt'</span>).modal(&#123;</div><div class="line">        <span class="attr">onConfirm</span>: <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">            <span class="keyword">if</span> (!$app.isNotNull($(<span class="string">"#indexId"</span>).val()) || !$app.isNumber($(<span class="string">"#indexId"</span>).val())) &#123;</div><div class="line">                $app.am_alert(<span class="string">"序号必须为数字"</span>);</div><div class="line">                <span class="keyword">return</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span> (!$app.isNotNull($(<span class="string">"#prizeName"</span>).val())) &#123;</div><div class="line">                $app.am_alert(<span class="string">"奖品名称不能为空"</span>);</div><div class="line">                <span class="keyword">return</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span> ($app.isNotNull($(<span class="string">"#uploadFile"</span>).val())) &#123;</div><div class="line">                $(<span class="string">"#my-modal-loading"</span>).modal();</div><div class="line">                $.ajaxFileUpload(&#123;</div><div class="line">                    <span class="attr">url</span> : $(<span class="string">"#basePath"</span>).val()+<span class="string">"gift/uploadGiftImg"</span>,</div><div class="line">                    <span class="attr">fileElementId</span> : <span class="string">"uploadFile"</span>, <span class="comment">//文件上传域的ID，这里是input的ID，而不是img的</span></div><div class="line">                    dataType : <span class="string">'json'</span>,</div><div class="line">                    <span class="attr">success</span>: <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</div><div class="line">                        <span class="keyword">if</span> (data.status==<span class="number">0</span>) &#123;</div><div class="line">                            $(<span class="string">"#imageUrl"</span>).val(data.imgurl);</div><div class="line">                            $(<span class="string">"#loadingText"</span>).text(<span class="string">"图片上传成功"</span>);</div><div class="line">                            giftJs.giftOperation(id);</div><div class="line">                        &#125; <span class="keyword">else</span> &#123;</div><div class="line">                            $app.am_alert(data.error);</div><div class="line">                        &#125;</div><div class="line">                    &#125;</div><div class="line">                &#125;);</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                giftJs.giftOperation(id);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            $(<span class="string">"#my-modal-loading"</span>).modal(<span class="string">"close"</span>);</div><div class="line">        &#125;,</div><div class="line">        <span class="attr">onCancel</span>: <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">            giftJs.resetGiftPrompt();</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;,</div><div class="line"><span class="attr">giftOperation</span> : <span class="function"><span class="keyword">function</span> (<span class="params">id</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> ($app.isNotNull($(<span class="string">"#imageUrl"</span>).val())) &#123;</div><div class="line">        $.ajax(&#123;</div><div class="line">            <span class="attr">type</span>: <span class="string">"POST"</span>,</div><div class="line">            <span class="attr">url</span>: $(<span class="string">"#basePath"</span>).val()+($app.isNotNull($(<span class="string">"#id"</span>).val())?<span class="string">"gift/editGift"</span>:<span class="string">"gift/addGift"</span>),</div><div class="line">            <span class="attr">data</span>: $(<span class="string">"#giftForm"</span>).serialize(),</div><div class="line">            <span class="attr">dataType</span> : <span class="string">'json'</span>,</div><div class="line">            <span class="attr">success</span>: <span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;</div><div class="line">                <span class="keyword">if</span> (result.status==<span class="number">0</span>) &#123;</div><div class="line">                    $app.am_alert(($app.isNotNull($(<span class="string">"#id"</span>).val())?<span class="string">"修改"</span>:<span class="string">"新增"</span>)+<span class="string">"奖品成功！"</span>);</div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    $app.am_alert(result.error);</div><div class="line">                &#125;</div><div class="line">                selectByPage(<span class="string">'gift'</span>,<span class="number">1</span>,<span class="number">10</span>);</div><div class="line">                giftJs.resetGiftPrompt();</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        $app.am_alert(<span class="string">"图片路径获取异常！"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;,</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="后台代码"><a href="#后台代码" class="headerlink" title="后台代码"></a>后台代码</h4>  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/uploadGiftImg"</span>)</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">uploadImg</span><span class="params">(@RequestParam(value = <span class="string">"uploadFile"</span>, required = <span class="keyword">false</span>)</span> MultipartFile file, HttpServletRequest request , HttpServletResponse response) <span class="keyword">throws</span> IllegalStateException, IOException </span>&#123;</div><div class="line">    JSONObject json = <span class="keyword">new</span> JSONObject();</div><div class="line">    <span class="keyword">if</span> (file != <span class="keyword">null</span>) &#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="comment">//上传奖品图片</span></div><div class="line">            String nameSuffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(<span class="string">"."</span>));</div><div class="line">            String pathHead = request.getSession().getServletContext().getRealPath(<span class="string">"/"</span>)+<span class="string">"images/"</span>;</div><div class="line">            File fileHead = <span class="keyword">new</span> File(pathHead);</div><div class="line">            <span class="keyword">if</span>(!fileHead.exists() &amp;&amp; !fileHead.isDirectory()) &#123;</div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    fileHead .mkdir();</div><div class="line">                &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">                    e.getStackTrace();</div><div class="line">                    json.put(<span class="string">"status_code"</span>, <span class="string">"1"</span>);</div><div class="line">                    json.put(<span class="string">"error"</span>, <span class="string">"保存路径文件夹创建异常!"</span>);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="comment">//  下面加的日期是为了防止上传的名字一样</span></div><div class="line">            String endPath  = <span class="string">"prize"</span>+<span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyyMMdd"</span>).format(<span class="keyword">new</span> Date()) + System.currentTimeMillis()+nameSuffix;</div><div class="line">            String path = pathHead+ endPath;</div><div class="line">            File localFile = <span class="keyword">new</span> File(path);</div><div class="line">            file.transferTo(localFile);</div><div class="line">            json.put(<span class="string">"status"</span>, <span class="string">"0"</span>);</div><div class="line">            json.put(<span class="string">"imgurl"</span>, <span class="string">"images/"</span>+endPath);</div><div class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">            json.put(<span class="string">"status_code"</span>, <span class="string">"1"</span>);</div><div class="line">            json.put(<span class="string">"error"</span>, <span class="string">"图片上传失败"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        json.put(<span class="string">"status_code"</span>, <span class="string">"1"</span>);</div><div class="line">        json.put(<span class="string">"error"</span>, <span class="string">"上传不能为空"</span>);</div><div class="line">    &#125;</div><div class="line">    returnMsg(response, json);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>  最后返回的是保存的相对路径，可以访问项目名+相对路径以查看上传的图像</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>​    直接拷贝了代码，代码解释的有点少，还有一些细节有待补充，如果今后遇到什么问题了再补充吧。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创 欢迎打赏</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/wechat.jpg" alt="GONETHEN WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/20/CentOS7安装jdk/" rel="next" title="CentOS7安装jdk">
+                <i class="fa fa-chevron-left"></i> CentOS7安装jdk
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/25/Shell脚本定时更新部署tomcat/" rel="prev" title="Shell脚本定时更新部署tomcat">
+                Shell脚本定时更新部署tomcat <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2018/04/24/ajaxFileUpload和SpringMVC实现文件上传/"
+           data-title="ajaxFileUpload和SpringMVC实现文件上传" data-url="http://gonethen.github.io/2018/04/24/ajaxFileUpload和SpringMVC实现文件上传/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/jay.jpg"
+               alt="GONETHEN" />
+          <p class="site-author-name" itemprop="name">GONETHEN</p>
+          <p class="site-description motion-element" itemprop="description">个人博客。</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">18</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="GONETHEN" target="_blank" title="WeChat">
+                  
+                    <i class="fa fa-fw fa-wechat"></i>
+                  
+                  WeChat
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/GONETHEN" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/GONETHEN" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/gonethen" target="_blank" title="ZhiHu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  ZhiHu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#前端jsp-js"><span class="nav-number">1.</span> <span class="nav-text">前端jsp+js</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#后台代码"><span class="nav-number">2.</span> <span class="nav-text">后台代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-paper-plane"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">GONETHEN</span>
+</div>
+
+
+<div class="powered-by">
+  <a class="theme-link" href="https://hexo.io">Hexo</a> 技术支持
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i> 访问量<span class="busuanzi-value" id="busuanzi_value_site_pv"></span>次</span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"gonethen"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+      
+      <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+      <script src="/js/src/hook-duoshuo.js?v=5.1.0"></script>
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

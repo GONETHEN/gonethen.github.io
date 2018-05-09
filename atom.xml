@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://gonethen.github.io/"/>
-  <updated>2018-05-06T12:49:55.680Z</updated>
+  <updated>2018-05-08T07:22:12.000Z</updated>
   <id>http://gonethen.github.io/</id>
   
   <author>
@@ -16,16 +16,196 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>svn更换服务器地址</title>
+    <link href="http://gonethen.github.io/2018/05/08/svn%E6%9B%B4%E6%8D%A2%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%9C%B0%E5%9D%80/"/>
+    <id>http://gonethen.github.io/2018/05/08/svn更换服务器地址/</id>
+    <published>2018-05-08T07:00:00.000Z</published>
+    <updated>2018-05-08T07:22:12.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>SVN日常使用技巧。</p>
+<a id="more"></a>
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>​    SVN服务器迁移之后，程序猿的代码不能继续做版本管理了，需要relocate一下。</p>
+<h3 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h3><h4 id="1-解决步骤"><a href="#1-解决步骤" class="headerlink" title="1. 解决步骤"></a>1. 解决步骤</h4><ol>
+<li><p>进入本地项目的根目录</p>
+</li>
+<li><p>右键 - TortoiseSVN - Relocate</p>
+<p><img src="https://img-blog.csdn.net/20150901191726971?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
+</li>
+<li><p>点击Relocate后，会有一个对话框，在To URL中修改成新的地址</p>
+<p><img src="https://img-blog.csdn.net/20150901191836578?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
+</li>
+<li><p>点击”OK”后，不出意外，会提示切换完成。</p>
+<p><img src="https://img-blog.csdn.net/20150901192637645?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt=""></p>
+</li>
+</ol>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>参考自：</p>
+<ul>
+<li><a href="https://blog.csdn.net/chanryma/article/details/48161783" target="_blank" rel="external">Windows环境，svn服务器地址换了，如何更新本地工作目录</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;SVN日常使用技巧。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="技术" scheme="http://gonethen.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="SVN" scheme="http://gonethen.github.io/tags/SVN/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Shell脚本定时更新部署tomcat</title>
+    <link href="http://gonethen.github.io/2018/04/25/Shell%E8%84%9A%E6%9C%AC%E5%AE%9A%E6%97%B6%E6%9B%B4%E6%96%B0%E9%83%A8%E7%BD%B2tomcat/"/>
+    <id>http://gonethen.github.io/2018/04/25/Shell脚本定时更新部署tomcat/</id>
+    <published>2018-04-25T02:30:11.000Z</published>
+    <updated>2018-05-08T07:22:10.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>原来打算用Python3，结果发现Shell更简单。</p>
+<a id="more"></a>
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>​    终于实现了一个简单的自动化部署，喜极而泣。顺便学习了一下Shell语言，嗯，学无止境。</p>
+<h3 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h3><blockquote>
+<ol>
+<li>为了实现服务器自动化部署</li>
+</ol>
+</blockquote>
+<h3 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h3><h4 id="1-编写Shell脚本"><a href="#1-编写Shell脚本" class="headerlink" title="1. 编写Shell脚本"></a>1. 编写Shell脚本</h4><ol>
+<li>在tomcat目录下执行<code>mkdir autodeploy</code>新建文件夹</li>
+<li>进入autodeploy目录，执行<code>touch autodeploy.sh</code>新建脚本文件</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line">now=`date +%Y%m%d%H%M%S`</div><div class="line">tomcatPath=/storage/lhTomcat</div><div class="line">backupPath=$tomcatPath/backup</div><div class="line">classesPath=$tomcatPath/webapps/game/WEB-INF/classes</div><div class="line">zip=$1</div><div class="line"></div><div class="line">if [ -e &quot;$zip.zip&quot; ]; then</div><div class="line">  echo -e &quot;\033[34m file: $zip.zip \033[0m&quot;</div><div class="line">else</div><div class="line">  echo -e &quot;\033[31m &apos;$zip.zip&apos; not exists \033[0m&quot;</div><div class="line">  exit -1</div><div class="line">fi</div><div class="line">echo -e &quot;\033[34m&quot;</div><div class="line">if [ ! -d &quot;$backupPath&quot; ]; then</div><div class="line">  mkdir &quot;$backupPath&quot;</div><div class="line">fi</div><div class="line">echo &quot;now : $now&quot;</div><div class="line">echo &quot;tomcat path: $tomcatPath&quot;</div><div class="line">echo &quot;backup path: $backupPath&quot;</div><div class="line">echo &apos;try to stop tomcat...&apos;</div><div class="line"></div><div class="line">pid=`ps aux | grep &quot;java&quot; | grep &quot;$tomcatPath&quot; | grep -v &quot;grep&quot; | awk &apos;&#123;printf $2&#125;&apos;`</div><div class="line">if [ -n $pid ]; then</div><div class="line">  echo &quot;tomcat pid: $pid&quot;;</div><div class="line">  kill -9 $pid;</div><div class="line">fi</div><div class="line"></div><div class="line">echo &apos;stop tomcat finished...&apos;</div><div class="line">echo &apos;backup old archive...&apos;</div><div class="line">if [ -e &quot;$tomcatPath/webapps/game&quot; ]; then</div><div class="line">  zip -q -r &quot;$backupPath/game_$now.zip&quot; &quot;$tomcatPath/webapps/game/&quot;;</div><div class="line">fi</div><div class="line"></div><div class="line">rm -rf $classesPath/com</div><div class="line">echo &quot;unzip $zip.zip to $classesPath/&quot;</div><div class="line">unzip -q -o &quot;$zip.zip&quot; -d &quot;$classesPath/&quot;</div><div class="line">echo &apos;startup tomcat...&apos;</div><div class="line">echo -e &quot;\033[37m&quot;</div><div class="line">sh $tomcatPath/bin/startup.sh</div></pre></td></tr></table></figure>
+<p>####2. 准备要更新的文件</p>
+<ol>
+<li>将项目类文件目录com打包成zip</li>
+<li>将zip文件上传到autodeploy目录下</li>
+</ol>
+<h4 id="3-定时执行Shell脚本"><a href="#3-定时执行Shell脚本" class="headerlink" title="3. 定时执行Shell脚本"></a>3. 定时执行Shell脚本</h4><ol>
+<li><p>需要用到crond服务，有些Linux已经安装，如果没有安装执行下面两句进行安装：</p>
+<blockquote>
+<p>yum install vixie-cron</p>
+<p>yum install crontabs</p>
+</blockquote>
+<p>crond服务的相关操作：</p>
+<blockquote>
+<p>service crond start //启动服务</p>
+<p>service crond stop //关闭服务</p>
+<p>service crond restart //重启服务</p>
+<p>service crond reload //重新载入配置</p>
+<p>service crond status //查看crontab服务状态</p>
+<p>chkconfig –level 35 crond on //加入开机自动启动</p>
+</blockquote>
+</li>
+<li><p>执行<code>yum install -y ntsysv</code>安装ntsysv，并执行<code>ntsysv</code>查看crond.service服务是否已设置为开机启动</p>
+</li>
+<li><p>新增调度任务有两种方法，第一种我尝试没有成功所以选择了第二种</p>
+<ul>
+<li><p>执行<code>vi /etc/crontab</code>编辑/etc/crontab文件，添加相应的任务</p>
+<p>默认文件格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">SHELL=/bin/bash</div><div class="line">PATH=/sbin:/bin:/usr/sbin:/usr/bin</div><div class="line">MAILTO=root</div><div class="line"></div><div class="line"># For details see man 4 crontabs</div><div class="line"></div><div class="line"># Example of job definition:</div><div class="line"># .---------------- minute (0 - 59)</div><div class="line"># |  .------------- hour (0 - 23)</div><div class="line"># |  |  .---------- day of month (1 - 31)</div><div class="line"># |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...</div><div class="line"># |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat</div><div class="line"># |  |  |  |  |</div><div class="line"># *  *  *  *  * user-name  command to be executed</div></pre></td></tr></table></figure>
+<p>顾名思义：</p>
+<blockquote>
+<p>星号（<em>）：代表所有可能的值，例如month字段如果是星号，则表示在满足其它字段的制约条件后每月都执行该命令操作<br>逗号（,）：可以用逗号隔开的值指定一个列表范围如，“1,2,5,7,8,9”<br>中杠（-）：可以用整数之间的中杠表示一个整数范围，例如“2-6”表示“2,3,4,5,6”<br>正斜线（/）：可以用正斜线指定时间的间隔频率，例如“0-23/2”表示每两小时执行一次。同时正斜线可以和星号一起使用，例如</em>/10，如果用在minute字段，表示每十分钟执行一次</p>
+</blockquote>
+</li>
+<li><p>执行<code>crontab -e，</code>然后添加相应的任务</p>
+<p>添加的内容跟编辑/etc/crontab文件一样，我想要我的Shell脚本在2018年4月26日4:30执行，那么就在第一行写入：</p>
+<blockquote>
+<p>30 4 26 4 * /storage/lhTomcat/autodeploy/autodeploy.sh /storage/lhTomcat/autodeploy/com</p>
+</blockquote>
+<p><strong>但是crond是周期性执行的，所以我们在使用完之后需要删除这个调度任务</strong></p>
+</li>
+</ul>
+</li>
+<li><p>执行<code>crontab -l -u root</code>查看用户root的所有调度任务</p>
+</li>
+<li><p>​</p>
+</li>
+<li><p>任务完成后记得执行<code>crontab -r</code>删除所有调度任务</p>
+</li>
+</ol>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>参考自：</p>
+<ul>
+<li><a href="https://blog.csdn.net/ywb201314/article/details/52047810" target="_blank" rel="external">tomcat自动化部署脚本</a></li>
+<li><a href="https://blog.csdn.net/netdxy/article/details/50562864" target="_blank" rel="external">Linux—CentOS 定时运行脚本配置</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;原来打算用Python3，结果发现Shell更简单。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="技术" scheme="http://gonethen.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Shell" scheme="http://gonethen.github.io/tags/Shell/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ajaxFileUpload和SpringMVC实现文件上传</title>
+    <link href="http://gonethen.github.io/2018/04/24/ajaxFileUpload%E5%92%8CSpringMVC%E5%AE%9E%E7%8E%B0%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/"/>
+    <id>http://gonethen.github.io/2018/04/24/ajaxFileUpload和SpringMVC实现文件上传/</id>
+    <published>2018-04-24T02:05:11.000Z</published>
+    <updated>2018-05-08T07:22:04.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>写Blog是个好习惯，今后再用到相关技术可以直接参考。</p>
+<a id="more"></a>
+<p>####准备工作####</p>
+<ol>
+<li>下载ajaxfileupload.js，最好使用jquery2.x，因为我用3.x的时候出现了一些问题</li>
+</ol>
+<ol>
+<li><p>配置spring-mvc.xml文件上传大小限制</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"multipartResolver"</span> <span class="attr">class</span>=<span class="string">"org.springframework.web.multipart.commons.CommonsMultipartResolver"</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"defaultEncoding"</span> <span class="attr">value</span>=<span class="string">"UTF-8"</span> /&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"maxInMemorySize"</span> <span class="attr">value</span>=<span class="string">"40960"</span> /&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"maxUploadSize"</span> <span class="attr">value</span>=<span class="string">"10485760000"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="前端jsp-js"><a href="#前端jsp-js" class="headerlink" title="前端jsp+js"></a>前端jsp+js</h4><p>所有方法都定义在一个giftJs的对象里</p>
+<ul>
+<li><p>jsp</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">id</span>=<span class="string">"previewImg"</span> <span class="attr">class</span>=<span class="string">"am-radius"</span>/&gt;</span></div><div class="line">                            <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">class</span>=<span class="string">"am-btn am-btn-danger am-btn-sm"</span>&gt;</span></div><div class="line">                                <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"am-icon-cloud-upload"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span> 选择要上传的文件<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">                            <span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"uploadFile"</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">name</span>=<span class="string">"uploadFile"</span> <span class="attr">onchange</span>=<span class="string">"giftJs.chooseFile(this)"</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>首先是一个图片预览的功能</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">getObjectURL : <span class="function"><span class="keyword">function</span>(<span class="params">file</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> url = <span class="literal">null</span> ;</div><div class="line">    <span class="keyword">if</span> (<span class="built_in">window</span>.createObjectURL!=<span class="literal">undefined</span>) &#123; <span class="comment">// basic</span></div><div class="line">        url = <span class="built_in">window</span>.createObjectURL(file) ;</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">window</span>.URL!=<span class="literal">undefined</span>) &#123; <span class="comment">// mozilla(firefox)</span></div><div class="line">        url = <span class="built_in">window</span>.URL.createObjectURL(file) ;</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">window</span>.webkitURL!=<span class="literal">undefined</span>) &#123; <span class="comment">// webkit or chrome</span></div><div class="line">        url = <span class="built_in">window</span>.webkitURL.createObjectURL(file) ;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> url ;</div><div class="line">&#125;,</div><div class="line"><span class="attr">image_check</span> : <span class="function"><span class="keyword">function</span>(<span class="params">img</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> ($app.isNotNull(img)) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="regexp">/.(jpg|jpeg|png|gif|bmp|JPG|JPEG|PNG|GIF|BMP)$/</span>.test(img)?<span class="literal">true</span>:(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            $app.am_alert(<span class="string">'图片格式仅支持jpg、jpeg、png、gif、bmp格式'</span>);</div><div class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">        &#125;)();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">&#125;,</div><div class="line"><span class="attr">chooseFile</span> : <span class="function"><span class="keyword">function</span>(<span class="params">fileObj</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (giftJs.image_check($(<span class="string">'#uploadFile'</span>).val())) &#123;</div><div class="line">        <span class="keyword">var</span> objUrl = giftJs.getObjectURL(fileObj.files[<span class="number">0</span>]); <span class="comment">//获取图片的路径，该路径不是图片在本地的路径</span></div><div class="line">        <span class="keyword">if</span> (objUrl) &#123;</div><div class="line">            $(<span class="string">"#previewImg"</span>).prop(<span class="string">"src"</span>, objUrl); <span class="comment">//将图片路径存入src中，显示出图片</span></div><div class="line">            $(<span class="string">"#previewImg"</span>).prop(<span class="string">"width"</span>, <span class="string">"140"</span>);</div><div class="line">            $(<span class="string">"#previewImg"</span>).prop(<span class="string">"height"</span>, <span class="string">"140"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;,</div></pre></td></tr></table></figure>
+</li>
+<li><p>然后是图片上传</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div></pre></td><td class="code"><pre><div class="line">openGiftPrompt : <span class="function"><span class="keyword">function</span>(<span class="params">id</span>) </span>&#123;</div><div class="line">    giftJs.resetGiftPrompt();</div><div class="line">    <span class="keyword">if</span> (id &gt; <span class="number">0</span>) &#123;</div><div class="line">        $.ajax(&#123;</div><div class="line">            <span class="attr">type</span>: <span class="string">"GET"</span>,</div><div class="line">            <span class="attr">async</span>: <span class="literal">false</span>,</div><div class="line">            <span class="attr">url</span>: $(<span class="string">"#basePath"</span>).val()+<span class="string">"gift/getGift"</span>,</div><div class="line">            <span class="attr">data</span>: <span class="string">"id="</span>+id,</div><div class="line">            <span class="attr">dataType</span> : <span class="string">'json'</span>,</div><div class="line">            <span class="attr">success</span>: <span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;</div><div class="line">                <span class="keyword">if</span> (result.status == <span class="number">0</span>) &#123;</div><div class="line">                    $(<span class="string">"#previewImg"</span>).prop(<span class="string">"src"</span>, <span class="string">"../"</span>+result.gift.imageUrl);</div><div class="line">                    $(<span class="string">"#previewImg"</span>).prop(<span class="string">"width"</span>, <span class="string">"140"</span>);</div><div class="line">                    $(<span class="string">"#previewImg"</span>).prop(<span class="string">"height"</span>, <span class="string">"140"</span>);</div><div class="line">                    $(<span class="string">"#indexId"</span>).val(result.gift.indexId);</div><div class="line">                    $(<span class="string">"#prizeName"</span>).val(result.gift.prizeName);</div><div class="line">                    $(<span class="string">"#probability"</span>).val(result.gift.probability);</div><div class="line">                    $(<span class="string">"#prizecount"</span>).val(result.gift.prizecount);</div><div class="line">                    $(<span class="string">"#type"</span>).val(result.gift.type);</div><div class="line">                    $(<span class="string">"#imageUrl"</span>).val(result.gift.imageUrl);</div><div class="line">                    $(<span class="string">"#id"</span>).val(result.gift.id);</div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    $app.am_alert(result.error);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line">    $(<span class="string">'#giftPrompt'</span>).modal(&#123;</div><div class="line">        <span class="attr">onConfirm</span>: <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">            <span class="keyword">if</span> (!$app.isNotNull($(<span class="string">"#indexId"</span>).val()) || !$app.isNumber($(<span class="string">"#indexId"</span>).val())) &#123;</div><div class="line">                $app.am_alert(<span class="string">"序号必须为数字"</span>);</div><div class="line">                <span class="keyword">return</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span> (!$app.isNotNull($(<span class="string">"#prizeName"</span>).val())) &#123;</div><div class="line">                $app.am_alert(<span class="string">"奖品名称不能为空"</span>);</div><div class="line">                <span class="keyword">return</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span> ($app.isNotNull($(<span class="string">"#uploadFile"</span>).val())) &#123;</div><div class="line">                $(<span class="string">"#my-modal-loading"</span>).modal();</div><div class="line">                $.ajaxFileUpload(&#123;</div><div class="line">                    <span class="attr">url</span> : $(<span class="string">"#basePath"</span>).val()+<span class="string">"gift/uploadGiftImg"</span>,</div><div class="line">                    <span class="attr">fileElementId</span> : <span class="string">"uploadFile"</span>, <span class="comment">//文件上传域的ID，这里是input的ID，而不是img的</span></div><div class="line">                    dataType : <span class="string">'json'</span>,</div><div class="line">                    <span class="attr">success</span>: <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</div><div class="line">                        <span class="keyword">if</span> (data.status==<span class="number">0</span>) &#123;</div><div class="line">                            $(<span class="string">"#imageUrl"</span>).val(data.imgurl);</div><div class="line">                            $(<span class="string">"#loadingText"</span>).text(<span class="string">"图片上传成功"</span>);</div><div class="line">                            giftJs.giftOperation(id);</div><div class="line">                        &#125; <span class="keyword">else</span> &#123;</div><div class="line">                            $app.am_alert(data.error);</div><div class="line">                        &#125;</div><div class="line">                    &#125;</div><div class="line">                &#125;);</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                giftJs.giftOperation(id);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            $(<span class="string">"#my-modal-loading"</span>).modal(<span class="string">"close"</span>);</div><div class="line">        &#125;,</div><div class="line">        <span class="attr">onCancel</span>: <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">            giftJs.resetGiftPrompt();</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;,</div><div class="line"><span class="attr">giftOperation</span> : <span class="function"><span class="keyword">function</span> (<span class="params">id</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> ($app.isNotNull($(<span class="string">"#imageUrl"</span>).val())) &#123;</div><div class="line">        $.ajax(&#123;</div><div class="line">            <span class="attr">type</span>: <span class="string">"POST"</span>,</div><div class="line">            <span class="attr">url</span>: $(<span class="string">"#basePath"</span>).val()+($app.isNotNull($(<span class="string">"#id"</span>).val())?<span class="string">"gift/editGift"</span>:<span class="string">"gift/addGift"</span>),</div><div class="line">            <span class="attr">data</span>: $(<span class="string">"#giftForm"</span>).serialize(),</div><div class="line">            <span class="attr">dataType</span> : <span class="string">'json'</span>,</div><div class="line">            <span class="attr">success</span>: <span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;</div><div class="line">                <span class="keyword">if</span> (result.status==<span class="number">0</span>) &#123;</div><div class="line">                    $app.am_alert(($app.isNotNull($(<span class="string">"#id"</span>).val())?<span class="string">"修改"</span>:<span class="string">"新增"</span>)+<span class="string">"奖品成功！"</span>);</div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    $app.am_alert(result.error);</div><div class="line">                &#125;</div><div class="line">                selectByPage(<span class="string">'gift'</span>,<span class="number">1</span>,<span class="number">10</span>);</div><div class="line">                giftJs.resetGiftPrompt();</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        $app.am_alert(<span class="string">"图片路径获取异常！"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;,</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="后台代码"><a href="#后台代码" class="headerlink" title="后台代码"></a>后台代码</h4>  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/uploadGiftImg"</span>)</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">uploadImg</span><span class="params">(@RequestParam(value = <span class="string">"uploadFile"</span>, required = <span class="keyword">false</span>)</span> MultipartFile file, HttpServletRequest request , HttpServletResponse response) <span class="keyword">throws</span> IllegalStateException, IOException </span>&#123;</div><div class="line">    JSONObject json = <span class="keyword">new</span> JSONObject();</div><div class="line">    <span class="keyword">if</span> (file != <span class="keyword">null</span>) &#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="comment">//上传奖品图片</span></div><div class="line">            String nameSuffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(<span class="string">"."</span>));</div><div class="line">            String pathHead = request.getSession().getServletContext().getRealPath(<span class="string">"/"</span>)+<span class="string">"images/"</span>;</div><div class="line">            File fileHead = <span class="keyword">new</span> File(pathHead);</div><div class="line">            <span class="keyword">if</span>(!fileHead.exists() &amp;&amp; !fileHead.isDirectory()) &#123;</div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    fileHead .mkdir();</div><div class="line">                &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">                    e.getStackTrace();</div><div class="line">                    json.put(<span class="string">"status_code"</span>, <span class="string">"1"</span>);</div><div class="line">                    json.put(<span class="string">"error"</span>, <span class="string">"保存路径文件夹创建异常!"</span>);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="comment">//  下面加的日期是为了防止上传的名字一样</span></div><div class="line">            String endPath  = <span class="string">"prize"</span>+<span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyyMMdd"</span>).format(<span class="keyword">new</span> Date()) + System.currentTimeMillis()+nameSuffix;</div><div class="line">            String path = pathHead+ endPath;</div><div class="line">            File localFile = <span class="keyword">new</span> File(path);</div><div class="line">            file.transferTo(localFile);</div><div class="line">            json.put(<span class="string">"status"</span>, <span class="string">"0"</span>);</div><div class="line">            json.put(<span class="string">"imgurl"</span>, <span class="string">"images/"</span>+endPath);</div><div class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">            json.put(<span class="string">"status_code"</span>, <span class="string">"1"</span>);</div><div class="line">            json.put(<span class="string">"error"</span>, <span class="string">"图片上传失败"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        json.put(<span class="string">"status_code"</span>, <span class="string">"1"</span>);</div><div class="line">        json.put(<span class="string">"error"</span>, <span class="string">"上传不能为空"</span>);</div><div class="line">    &#125;</div><div class="line">    returnMsg(response, json);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>  最后返回的是保存的相对路径，可以访问项目名+相对路径以查看上传的图像</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>​    直接拷贝了代码，代码解释的有点少，还有一些细节有待补充，如果今后遇到什么问题了再补充吧。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;写Blog是个好习惯，今后再用到相关技术可以直接参考。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="技术" scheme="http://gonethen.github.io/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Java" scheme="http://gonethen.github.io/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
     <title>CentOS7安装jdk</title>
     <link href="http://gonethen.github.io/2018/04/20/CentOS7%E5%AE%89%E8%A3%85jdk/"/>
     <id>http://gonethen.github.io/2018/04/20/CentOS7安装jdk/</id>
     <published>2018-04-20T05:05:11.000Z</published>
-    <updated>2018-05-06T12:49:55.680Z</updated>
+    <updated>2018-05-09T14:07:48.299Z</updated>
     
     <content type="html"><![CDATA[<p>装过好几次了，每次都上网查，下次直接看自己的博客。用rpm格式。</p>
 <a id="more"></a>
-<p>####安装步骤</p>
-<ol>
+<h4 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h4><ol>
 <li>下载对应的jdk-8u151-linux-x64.rpm文件到/usr/local</li>
 </ol>
 <ol>
@@ -39,8 +219,7 @@
 <li><p>执行<code>java -version</code>检查是否安装成功</p>
 </li>
 </ol>
-<p>####总结</p>
-<ul>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><ul>
 <li>其实很简单</li>
 </ul>
 ]]></content>
@@ -63,7 +242,7 @@
     <link href="http://gonethen.github.io/2018/04/20/CentOS7%E5%AE%89%E8%A3%85python3/"/>
     <id>http://gonethen.github.io/2018/04/20/CentOS7安装python3/</id>
     <published>2018-04-20T04:05:11.000Z</published>
-    <updated>2018-05-06T12:50:04.344Z</updated>
+    <updated>2018-05-09T14:07:56.610Z</updated>
     
     <content type="html"><![CDATA[<p>What day is today?</p>
 <a id="more"></a>
