@@ -241,7 +241,7 @@
     <link href="http://gonethen.github.io/2018/04/20/CentOS7%E5%AE%89%E8%A3%85python3/"/>
     <id>http://gonethen.github.io/2018/04/20/CentOS7安装python3/</id>
     <published>2018-04-20T04:05:11.000Z</published>
-    <updated>2018-05-09T14:07:56.610Z</updated>
+    <updated>2018-05-09T14:22:13.571Z</updated>
     
     <content type="html"><![CDATA[<p>What day is today?</p>
 <a id="more"></a>
@@ -269,8 +269,7 @@
 <li><p>执行<code>mv python python.bak</code>以备份python</p>
 </li>
 </ul>
-<p>####2. 安装Python3</p>
-<ul>
+<h4 id="2-安装Python3"><a href="#2-安装Python3" class="headerlink" title="2. 安装Python3"></a>2. 安装Python3</h4><ul>
 <li><p>执行<code>wget https://www.python.org/ftp/python/3.6.2/Python-3.6.2.tar.xz</code>下载Python3，此时仍在/usr/bin目录下</p>
 </li>
 <li><p>执行<code>tar -xvJf Python-3.6.2.tar.xz</code>解压Python-3.6.2.tar.xz</p>
